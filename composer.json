@@ -1,5 +1,5 @@
 {
-    "name": "drupal/recommended-project",
+    "name": "drupal/git-clone-project",
     "description": "TODO",
     "type": "project",
     "license": "GPL-2.0-or-later",
@@ -10,19 +10,32 @@
     },
     "repositories": [
         {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        {
             "type": "path",
-            "url": "./repos/drupal",
+            "url": "repos/drupal",
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "path",
+            "url": "repos/drupal/core"
+        },
+        {
+            "type": "path",
+            "url": "repos/drupal/composer/Plugin/ProjectMessage"
+        },
+        {
+            "type": "path",
+            "url": "repos/drupal/composer/Plugin/VendorHardening"
+        },
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
         }
     ],
     "require": {
         "composer/installers": "^1.9",
+        "drupal/core-composer-scaffold": "^8.9",
         "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
