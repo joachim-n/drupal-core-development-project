@@ -1,9 +1,10 @@
 This is a Composer template for developing Drupal core.
 
-It allows
+It allows:
 
-- a clean git clone of Drupal core
-- Composer dependencies of Drupal core are installed, so it runs
+- a clean git clone of Drupal core.
+- Composer dependencies of Drupal core are installed, so Drupal can be installed
+  and run as normal.
 - other Composer packages you might want, such as Drush, can be installed too,
   but don't affect the composer files that are part of Drupal core.
 
@@ -24,3 +25,13 @@ $ cd ..
 $ composer install
 $ ln -s PATH-TO-PROJECT-FOLDER/vendor repos/drupal/vendor
 ```
+
+The Drupal core git clone will be clean apart from:
+
+```
+	sites/default/settings.php
+	vendor
+```
+
+Since it doesn't have a .gitignore at the top level, you can add one to ignore
+those files if you like.
