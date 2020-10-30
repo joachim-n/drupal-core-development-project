@@ -36,7 +36,9 @@
     "require": {
         "composer/installers": "^1.9",
         "drupal/core-composer-scaffold": "^8.9",
-        "drupal/drupal": "*"
+        "drupal/drupal": "*",
+        "drush/drush": "^10.3",
+        "symfony/var-dumper": "^5.1"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
