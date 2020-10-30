@@ -18,6 +18,7 @@ $ cd repos
 $ git clone --branch 9.2.x https://git.drupalcode.org/project/drupal.git
 $ cd ..
 $ composer install
+$ ln -s PATH TO ROOT FOLDER/vendor repos/drupal/vendor
 ```
 
 Current status:
