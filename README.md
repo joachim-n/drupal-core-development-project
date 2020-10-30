@@ -8,7 +8,7 @@ It allows:
 - other Composer packages you might want, such as Drush, can be installed too,
   but don't affect the composer files that are part of Drupal core.
 
-Instructions:
+## Instructions:
 
 Clone this repo into, say, 'drupal-dev'.
 
@@ -34,3 +34,9 @@ The Drupal core git clone will be clean apart from:
 
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
 those files if you like.
+
+## How it works
+
+The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
+
+Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
