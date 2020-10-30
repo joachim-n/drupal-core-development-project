@@ -13,7 +13,6 @@ Instructions:
 Clone this repo into, say, 'drupal-dev'.
 
 ```
-# Create a project folder.
 $ cd drupal-dev
 # Create a folder in which to store git clones, which Composer will symlink in.
 $ mkdir repos
