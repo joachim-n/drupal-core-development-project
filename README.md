@@ -1,27 +1,26 @@
-This is an experiment to try to find a better way to develop Drupal core with Composer.
+This is a Composer template for developing Drupal core.
 
-The ideal would be:
+It allows
 
 - a clean git clone of Drupal core
 - Composer dependencies of Drupal core are installed, so it runs
-- other Composer packages you might want, such as Drush, can be installed too
-- the Drupal core git clone doesn't have its composer.lock file changed by all this, because that's a pain for making PRs/patches
+- other Composer packages you might want, such as Drush, can be installed too,
+  but don't affect the composer files that are part of Drupal core.
 
 Instructions:
 
 Clone this repo into, say, 'drupal-dev'.
 
 ```
+# Create a project folder.
 $ cd drupal-dev
+# Create a folder in which to store git clones, which Composer will symlink in.
 $ mkdir repos
 $ cd repos
+# Clone Drupal core, to whatever branch you like.
 $ git clone --branch 9.2.x https://git.drupalcode.org/project/drupal.git
+# Go back to the project root.
 $ cd ..
 $ composer install
-$ ln -s PATH TO ROOT FOLDER/vendor repos/drupal/vendor
+$ ln -s PATH-TO-PROJECT-FOLDER/vendor repos/drupal/vendor
 ```
-
-Current status:
-
-- composer install works! yay!
-- the autoload in repos/drupal/autoload.php crashes the site. boo! :(
