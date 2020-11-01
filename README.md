@@ -39,6 +39,14 @@ those files if you like.
 
 Can't get Composer to install drupal/core-dev!
 
+To get kernel tests to run with Drupal 9.2, do:
+
+```
+composer require phpunit/phpunit ^8.4.1
+composer require symfony/phpunit-bridge ^5.1.4
+composer require mikey179/vfsstream ^1.6.8
+```
+
 ## How it works
 
 The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
