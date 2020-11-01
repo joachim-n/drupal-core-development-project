@@ -35,6 +35,10 @@ The Drupal core git clone will be clean apart from:
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
 those files if you like.
 
+## Known problems
+
+Can't get Composer to install drupal/core-dev!
+
 ## How it works
 
 The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
