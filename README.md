@@ -47,6 +47,9 @@ line in web/index.html that creates the kernel:
 $kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
 ```
 
+With this setup, you can use the site folder at web/sites/default (rather than
+repos/drupal/sites/default).
+
 Drush doesn't detect modules either because of this bug: https://github.com/drush-ops/drush/issues/4584
 
 ## How it works
