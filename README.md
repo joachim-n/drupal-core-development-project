@@ -37,6 +37,8 @@ those files if you like.
 
 ## Known problems
 
+### Modules
+
 Drupal core can't see third-party modules because it detects the app root as
 being repos/drupal rather than web/. A workaround for this is to change the
 line in web/index.html that creates the kernel:
@@ -44,6 +46,8 @@ line in web/index.html that creates the kernel:
 ```
 $kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
 ```
+
+Drush doesn't detect modules either because of this bug: https://github.com/drush-ops/drush/issues/4584
 
 ## How it works
 
