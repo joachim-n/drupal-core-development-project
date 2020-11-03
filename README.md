@@ -37,14 +37,12 @@ those files if you like.
 
 ## Known problems
 
-Can't get Composer to install drupal/core-dev!
-
-To get kernel tests to run with Drupal 9.2, do:
+Drupal core can't see third-party modules because it detects the app root as
+being repos/drupal rather than web/. A workaround for this is to change the
+line in web/index.html that creates the kernel:
 
 ```
-composer require phpunit/phpunit ^8.4.1
-composer require symfony/phpunit-bridge ^5.1.4
-composer require mikey179/vfsstream ^1.6.8
+$kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
 ```
 
 ## How it works
