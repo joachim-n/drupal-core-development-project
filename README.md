@@ -14,14 +14,22 @@ Clone this repo into, say, 'drupal-dev'.
 
 ```
 $ cd drupal-dev
+
 # Create a folder in which to store git clones, which Composer will symlink in.
 $ mkdir repos
 $ cd repos
+
 # Clone Drupal core, to whatever branch you like.
 $ git clone --branch 9.2.x https://git.drupalcode.org/project/drupal.git
+
 # Go back to the project root.
 $ cd ..
+
+# Install packages with Composer.
 $ composer install
+
+# Symlink the Composer vendor folder into the Drupal core clone. This is so that
+# code in Drupal core that expects it there works correctly.
 $ ln -s PATH-TO-PROJECT-FOLDER/vendor repos/drupal/vendor
 ```
 
@@ -49,6 +57,12 @@ $kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
 
 With this setup, you can use the site folder at web/sites/default (rather than
 repos/drupal/sites/default).
+
+## Workarounds
+
+### Vendor folder
+
+The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
 
 ## How it works
 
