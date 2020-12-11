@@ -8,7 +8,9 @@ It allows:
 - other Composer packages you might want, such as Drush, can be installed too,
   but don't affect the composer files that are part of Drupal core.
 
-## Instructions:
+## Instructions
+
+### Installation
 
 Clone this repo into, say, 'drupal-dev'.
 
@@ -42,6 +44,22 @@ The Drupal core git clone will be clean apart from:
 
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
 those files if you like.
+
+### Running tests
+
+The simplest way to run tests with this setup is to put the phpunit.xml file in the project root and then run tests from there:
+
+$ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+
+To set this up, copy Drupal core's sample phpunit.xml file to the project root:
+
+$ cp web/core/phpunit.xml.dist phpunit.xml
+
+Then change the `bootstrap` attribute so the path is correct:
+
+```
+<phpunit bootstrap="web/core/tests/bootstrap.php"
+```
 
 ## Known problems
 
