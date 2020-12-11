@@ -50,8 +50,6 @@ $kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
 With this setup, you can use the site folder at web/sites/default (rather than
 repos/drupal/sites/default).
 
-Drush doesn't detect modules either because of this bug: https://github.com/drush-ops/drush/issues/4584
-
 ## How it works
 
 The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
