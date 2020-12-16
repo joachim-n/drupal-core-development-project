@@ -82,6 +82,12 @@ repos/drupal/sites/default).
 
 The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
 
+### App root index.php patch
+
+The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
+
+See https://www.drupal.org/project/drupal/issues/3188703.
+
 ## How it works
 
 The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.

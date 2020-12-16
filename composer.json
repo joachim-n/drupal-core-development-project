@@ -48,6 +48,11 @@
     "config": {
         "sort-packages": true
     },
+    "scripts": {
+      "post-drupal-scaffold-cmd": [
+        "cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch"
+      ]
+    },
     "extra": {
         "drupal-scaffold": {
             "locations": {
