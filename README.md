@@ -29,10 +29,6 @@ $ cd ..
 
 # Install packages with Composer.
 $ composer install
-
-# Symlink the Composer vendor folder into the Drupal core clone. This is so that
-# code in Drupal core that expects it there works correctly.
-$ ln -s PATH-TO-PROJECT-FOLDER/vendor repos/drupal/vendor
 ```
 
 The Drupal core git clone will be clean apart from:
