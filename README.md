@@ -57,21 +57,6 @@ Then change the `bootstrap` attribute so the path is correct:
 <phpunit bootstrap="web/core/tests/bootstrap.php"
 ```
 
-## Known problems
-
-### Modules
-
-Drupal core can't see third-party modules because it detects the app root as
-being repos/drupal rather than web/. A workaround for this is to change the
-line in web/index.html that creates the kernel:
-
-```
-$kernel = new DrupalKernel('prod', $autoloader, TRUE, __DIR__);
-```
-
-With this setup, you can use the site folder at web/sites/default (rather than
-repos/drupal/sites/default).
-
 ## Workarounds
 
 ### Vendor folder
