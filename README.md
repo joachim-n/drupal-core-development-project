@@ -59,15 +59,21 @@ Then change the `bootstrap` attribute so the path is correct:
 
 ## Workarounds
 
+Several workarounds are necessary to make Drupal core work correctly when symlinked into the project:
+
 ### Vendor folder
 
 The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
+
+This is done by a Composer script after initial installation.
 
 ### App root index.php patch
 
 The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
 
-See https://www.drupal.org/project/drupal/issues/3188703.
+This is done by a Composer script after initial installation.
+
+See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
 ## How it works
 
