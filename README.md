@@ -87,6 +87,14 @@ This is done by a Composer script after initial installation.
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
+### Browser test output
+
+The HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect. See the section on running tests in this README for the fix.
+
+### Simpletest folder
+
+When running browser tests, the initial setup of Drupal creates a site folder using the real file locations with symlinks resolved, thus `repos/drupal/sites/simpletest`, but during the request to the test site, Drupal looks in `/web/sites/simpletest`. See the section on running tests for the workaround.
+
 ## How it works
 
 The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
