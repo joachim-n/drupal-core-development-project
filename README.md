@@ -61,14 +61,6 @@ Then change the `bootstrap` attribute so the path is correct:
 <phpunit bootstrap="web/core/tests/bootstrap.php"
 ```
 
-#### Browser test HTML output
-
-For HTML output to work correctly in browser tests, the BROWSERTEST_OUTPUT_BASE_URL environment variable needs to be set to point into the core git clone:
-
-```
-<env name="BROWSERTEST_OUTPUT_BASE_URL" value="http://URL-TO-YOUR-SITE/repos/drupal"/>
-````
-
 ## Workarounds
 
 Several workarounds are necessary to make Drupal core work correctly when symlinked into the project:
