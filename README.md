@@ -61,15 +61,6 @@ Then change the `bootstrap` attribute so the path is correct:
 <phpunit bootstrap="web/core/tests/bootstrap.php"
 ```
 
-#### Browser test simpletest folder
-
-For browser tests to work, the simpletest folder needs to be symlinked into the Drupal core git clone:
-
-```
-$ mkdir web/sites/simpletest
-$ ln -s ../../../web/sites/simpletest repos/drupal/sites
-```
-
 #### Browser test HTML output
 
 For HTML output to work correctly in browser tests, the BROWSERTEST_OUTPUT_BASE_URL environment variable needs to be set to point into the core git clone:
@@ -98,7 +89,9 @@ See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
 ### Browser test output
 
-The HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect. See the section on running tests in this README for the fix.
+The HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect. The simpletest folder needs to be symlinked into the Drupal core git clone.
+
+This is done by a Composer script after initial installation.
 
 ### Simpletest folder
 
