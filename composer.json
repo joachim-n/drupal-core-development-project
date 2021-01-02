@@ -51,7 +51,9 @@
     "scripts": {
       "post-drupal-scaffold-cmd": [
         "cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch",
-        "ln -s ../../vendor ./repos/drupal/vendor"
+        "ln -s ../../vendor ./repos/drupal/vendor",
+        "mkdir -p web/sites/simpletest",
+        "ln -s ../../../web/sites/simpletest repos/drupal/sites"
       ]
     },
     "extra": {
