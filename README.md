@@ -61,6 +61,12 @@ Then change the `bootstrap` attribute so the path is correct:
 <phpunit bootstrap="web/core/tests/bootstrap.php"
 ```
 
+## How it works
+
+The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
+
+Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
+
 ## Workarounds
 
 Several workarounds are necessary to make Drupal core work correctly when symlinked into the project:
@@ -101,9 +107,3 @@ This is done by a Composer script after initial installation:
 mkdir -p web/sites/simpletest
 ln -s ../../../web/sites/simpletest repos/drupal/sites
 ```
-
-## How it works
-
-The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
-
-Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
