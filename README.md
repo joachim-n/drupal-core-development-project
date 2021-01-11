@@ -69,25 +69,38 @@ Several workarounds are necessary to make Drupal core work correctly when symlin
 
 The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
 
-This is done by a Composer script after initial installation.
+This is done by a Composer script after initial installation:
+
+```
+ln -s ../../vendor ./repos/drupal/vendor
+```
 
 ### App root index.php patch
 
 The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
 
-This is done by a Composer script after initial installation.
+This is done by a Composer script after initial installation:
+
+```
+cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
+```
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
-### Browser test output
-
-The HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect. The simpletest folder needs to be symlinked into the Drupal core git clone.
-
-This is done by a Composer script after initial installation.
-
 ### Simpletest folder
 
-When running browser tests, the initial setup of Drupal creates a site folder using the real file locations with symlinks resolved, thus `repos/drupal/sites/simpletest`, but during the request to the test site, Drupal looks in `/web/sites/simpletest`. See the section on running tests for the workaround.
+When running browser tests, the initial setup of Drupal in FunctionalTestSetupTrait::prepareEnvironment() creates a site folder using the real file locations with symlinks resolved, thus `repos/drupal/sites/simpletest`, but during the request to the test site, Drupal looks in `/web/sites/simpletest`.
+
+Additionally, the HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect.
+
+The fix for both of these is to create the simpletest site folder in the web root and symlink it into the Drupal core git clone.
+
+This is done by a Composer script after initial installation:
+
+```
+mkdir -p web/sites/simpletest
+ln -s ../../../web/sites/simpletest repos/drupal/sites
+```
 
 ## How it works
 
