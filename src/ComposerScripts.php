@@ -20,8 +20,12 @@ class ComposerScripts {
     static::makeSymlink('../../vendor', 'repos/drupal/vendor');
 
     // Create folders for running tests.
-    mkdir('web/sites/simpletest', 0777, TRUE);
-    mkdir('web/sites/simpletest/browser_output', 0777, TRUE);
+    if (!file_exists('web/sites/simpletest')) {
+      mkdir('web/sites/simpletest', 0777, TRUE);
+    }
+    if (!file_exists('web/sites/simpletest/browser_output')) {
+      mkdir('web/sites/simpletest/browser_output', 0777, TRUE);
+    }
 
     // Symlink the simpletest folder into the Drupal core git repo.
     static::makeSymlink('../../../web/sites/simpletest', 'repos/drupal/sites/simpletest');
