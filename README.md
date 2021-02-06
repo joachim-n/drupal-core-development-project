@@ -75,13 +75,23 @@ Several workarounds are necessary to make Drupal core work correctly when symlin
 
 The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
 
-This is done by a Composer script after initial installation.
+This is done by a Composer script after initial installation. The manual command
+is:
+
+```
+ln -s ../../vendor ./repos/drupal/vendor
+```
 
 ### App root index.php patch
 
 The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
 
-This is done by a Composer script after initial installation.
+This is done by a Composer script after initial installation. The manual command
+is:
+
+```
+cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
+```
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
@@ -93,4 +103,10 @@ Additionally, the HTML files output from Browser tests are written into the Drup
 
 The fix for both of these is to create the simpletest site folder in the web root and symlink it into the Drupal core git clone.
 
-This is done by a Composer script after initial installation.
+This is done by a Composer script after initial installation. The manual command
+is:
+
+```
+mkdir -p web/sites/simpletest
+ln -s ../../../web/sites/simpletest repos/drupal/sites
+```
