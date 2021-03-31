@@ -45,7 +45,8 @@ class ComposerScripts {
   protected static function makeSymlink($target, $link) {
     if (file_exists($link)) {
       if (!is_link($link) || readlink($link) != $target) {
-        print("WARNING: $link exists already and is not correctly symlinked to $target.");
+        $actual_target = readlink($link);
+        print("WARNING: {$link} exists already and is incorrectly symlinked to {$actual_target} instead of {$target}.\n");
       }
     }
     else {
