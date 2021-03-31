@@ -5,8 +5,9 @@ It allows:
 - a clean git clone of Drupal core.
 - Composer dependencies of Drupal core are installed, so Drupal can be installed
   and run as normal.
-- other Composer packages you might want, such as Drush, can be installed too,
-  but don't affect the composer files that are part of Drupal core.
+- other Composer packages you might want, such as Drush, Devel module, and Admin
+  Toolbar moduke, can be installed too, but don't affect the composer files
+  that are part of Drupal core.
 
 ## Instructions
 
