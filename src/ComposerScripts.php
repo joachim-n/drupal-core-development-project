@@ -10,6 +10,10 @@ class ComposerScripts {
    * See README for details.
    */
   public static function postDrupalScaffold() {
+    // Development: this makes symfony var-dumper work.
+    // See https://github.com/composer/composer/issues/7911
+    include './vendor/symfony/var-dumper/Resources/functions/dump.php';
+
     // Apply a patch to the scaffold index.php file.
     // See https://www.drupal.org/project/drupal/issues/3188703
     chdir('web');
@@ -44,7 +48,13 @@ class ComposerScripts {
    */
   protected static function makeSymlink($target, $link) {
     if (file_exists($link)) {
-      if (!is_link($link) || readlink($link) != $target) {
+      if (!is_link($link)) {
+        print("WARNING: {$link} exists already and is not a symlink.\n");
+      }
+
+      // Use realpath() on the target in case the symlink is absolute while the
+      // expected target is relative.
+      if (readlink($link) != $target) {
         $actual_target = readlink($link);
         print("WARNING: {$link} exists already and is incorrectly symlinked to {$actual_target} instead of {$target}.\n");
       }
