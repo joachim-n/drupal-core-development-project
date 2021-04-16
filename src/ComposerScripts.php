@@ -2,6 +2,9 @@
 
 namespace DrupalGitCloneProject;
 
+/**
+ * Provides Composer scripts for setting up Drupal from a git clone.
+ */
 class ComposerScripts {
 
   /**
