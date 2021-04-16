@@ -1,13 +1,8 @@
 {
-    "name": "drupal/git-clone-project",
-    "description": "TODO",
+    "name": "joachim-n/drupal-core-composer",
+    "description": "Composer project for developing Drupal core",
     "type": "project",
     "license": "GPL-2.0-or-later",
-    "homepage": "https://www.drupal.org/project/drupal",
-    "support": {
-        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
-        "chat": "https://www.drupal.org/node/314178"
-    },
     "repositories": [
         {
             "type": "path",
