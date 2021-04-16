@@ -68,6 +68,12 @@ The composer.json at the project root uses a Composer path repository so that wh
 
 Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
 
+## Limitations
+
+Most Drush commands work, but `drush cr` does *not*. To rebuild, install Devel module and use that instead.
+
+For a fix, see https://www.drupal.org/project/drupal/issues/1792310.
+
 ## Workarounds
 
 Several workarounds are necessary to make Drupal core work correctly when symlinked into the project:
