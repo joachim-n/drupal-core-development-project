@@ -76,7 +76,7 @@ For a fix, see https://www.drupal.org/project/drupal/issues/1792310.
 
 ## Workarounds
 
-Several workarounds are necessary to make Drupal core work correctly when symlinked into the project:
+Several workarounds are necessary to make Drupal core work correctly when symlinked into the project. These are all taken care of by Composer scripts during installation. Details are below.
 
 ### Vendor folder
 
