@@ -16,7 +16,7 @@ It allows:
 To install a Drupal project for working on Drupal core:
 
 ```
-$ composer create-project joachim-n/drupal-core-composer
+$ composer create-project joachim-n/drupal-core-development-project
 ```
 
 Composer will clone Drupal core into a 'repos/drupal' directory within the
@@ -121,7 +121,7 @@ clone of the template repository.
 In a separate location, do:
 
 ```
-$ composer create-project joachim-n/drupal-core-composer NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url": "/path/to/git/clone/of/project/template/", "type": "vcs"}'
+$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url": "/path/to/git/clone/of/project/template/", "type": "vcs"}'
 ```
 
 ### Workarounds

@@ -1,5 +1,5 @@
 {
-    "name": "joachim-n/drupal-core-composer",
+    "name": "joachim-n/drupal-core-development-project",
     "description": "Composer project for developing Drupal core",
     "type": "project",
     "license": "GPL-2.0-or-later",
