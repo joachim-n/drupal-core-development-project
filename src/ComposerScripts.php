@@ -2,10 +2,39 @@
 
 namespace DrupalGitCloneProject;
 
+use Composer\Script\Event;
+
 /**
  * Provides Composer scripts for setting up Drupal from a git clone.
  */
 class ComposerScripts {
+
+  /**
+   * Clones Drupal core if it's not already in repos/drupal.
+   *
+   * Script for the 'post-root-package-install' event.
+   */
+  public static function postRootPackageInstall(Event $event) {
+    if (!file_exists('repos/drupal/.git')) {
+      $io = $event->getIO();
+
+      if (!file_exists('repos')) {
+        $io->write("Creating 'repos/' directory within the project directory.");
+
+        mkdir('repos');
+      }
+
+      $project_root = getcwd();
+      chdir('repos');
+
+      $io->write("Cloning Drupal core into 'repos/drupal'.");
+
+      system('git clone https://git.drupalcode.org/project/drupal.git');
+
+      // Restore the working directory to the project root.
+      chdir($project_root);
+    }
+  }
 
   /**
    * Sets up files and symlinks after installation.

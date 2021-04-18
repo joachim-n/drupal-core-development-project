@@ -44,9 +44,12 @@
         "sort-packages": true
     },
     "scripts": {
-      "post-drupal-scaffold-cmd": [
-        "DrupalGitCloneProject\\ComposerScripts::postDrupalScaffold"
-      ]
+        "post-root-package-install": [
+            "DrupalGitCloneProject\\ComposerScripts::postRootPackageInstall"
+        ],
+        "post-drupal-scaffold-cmd": [
+            "DrupalGitCloneProject\\ComposerScripts::postDrupalScaffold"
+        ]
     },
     "autoload": {
         "psr-4": {
