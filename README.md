@@ -33,6 +33,12 @@ container and clear caches, install Devel module and use its menu items instead.
 A fix is being worked on: see
 https://www.drupal.org/project/drupal/issues/1792310.
 
+During some Composer commands you may see multiple copies of this error message:
+
+> Could not scan for classes inside [Drupal class filename].
+
+These are harmless and can be ignored.
+
 ## Developing Drupal core
 
 You can use the Drupal core git clone at 'repos/drupal/' in any way you like:
