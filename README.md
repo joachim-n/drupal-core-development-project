@@ -54,7 +54,8 @@ you need to be in the root directory of the project.
 
 Changes to the git clone's composer.json will be taken into account by Composer.
 So for example, if pulling from the main branch of Drupal core changes Composer
-dependencies, you should run Composer on the project to install these.
+dependencies, and in particular if you change to a different core major or minor
+branch, you should run `composer update` on the project to install these.
 
 ### Running tests
 
