@@ -56,6 +56,11 @@
             "DrupalGitCloneProject\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Drupal\\Composer\\": "repos/drupal/composer"
+        }
+    },
     "extra": {
         "drupal-scaffold": {
             "locations": {

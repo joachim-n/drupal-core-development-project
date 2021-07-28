@@ -175,3 +175,9 @@ is:
 mkdir -p web/sites/simpletest
 ln -s ../../../web/sites/simpletest repos/drupal/sites
 ```
+
+#### Autoload of Drupal composer testing classes
+
+Drupal's /composer folder is not symlinked and therefore isn't visible to
+Composer. It's needed for some tests, and so is declared as an autoload
+location.
