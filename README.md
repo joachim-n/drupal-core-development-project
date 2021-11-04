@@ -148,13 +148,14 @@ ln -s ../../vendor ./repos/drupal/vendor
 
 #### App root index.php patch
 
-The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
+The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.  The update.php scaffold file has to be patched for the same reason.
 
 This is done by a Composer script after initial installation. The manual command
 is:
 
 ```
 cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
+cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 ```
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
