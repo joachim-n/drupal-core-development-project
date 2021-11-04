@@ -146,12 +146,12 @@ is:
 ln -s ../../vendor ./repos/drupal/vendor
 ```
 
-#### App root index.php patch
+#### App root files patches
 
-The index.php scaffold file has to be patched after it has been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.  The update.php scaffold file has to be patched for the same reason.
+The index.php and update.php scaffold files have to be patched after they have been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
 
-This is done by a Composer script after initial installation. The manual command
-is:
+This is done by a Composer script after initial installation. The manual commands
+are:
 
 ```
 cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
