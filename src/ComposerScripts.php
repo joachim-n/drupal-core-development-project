@@ -62,11 +62,6 @@ class ComposerScripts {
     if (!file_exists('web/sites/simpletest/browser_output')) {
       mkdir('web/sites/simpletest/browser_output', 0777, TRUE);
     }
-
-//    if (!file_exists('web/sites/default/files')) {
-//      mkdir('web/sites/default', 0777, TRUE);
-//    }
-
     // Symlink the simpletest folder into the Drupal core git repo.
     static::makeSymlink('../../../web/sites/simpletest', 'repos/drupal/sites/simpletest');
     static::makeSymlink( '../../../repos/drupal/sites/default/files', 'web/sites/default/files');
