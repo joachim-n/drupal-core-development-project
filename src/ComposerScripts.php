@@ -67,6 +67,7 @@ class ComposerScripts {
 
     // Symlink the simpletest folder into the Drupal core git repo.
     static::makeSymlink('../../../web/sites/simpletest', 'repos/drupal/sites/simpletest');
+    static::makeSymlink( 'repos/drupal/sites/default', '../../../web/sites/default');
   }
 
   /**
