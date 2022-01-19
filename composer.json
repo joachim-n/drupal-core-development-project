@@ -64,9 +64,6 @@
     },
     "extra": {
         "drupal-scaffold": {
-            "allowed-packages": [
-                "joachim-n/drupal-core-development-project"
-            ],
             "locations": {
                 "web-root": "web/"
             },

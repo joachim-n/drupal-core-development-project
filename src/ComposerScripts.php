@@ -50,8 +50,6 @@ class ComposerScripts {
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
-//    shell_exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch');
-//    shell_exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch');
 
     // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
@@ -86,8 +84,6 @@ class ComposerScripts {
    *   The new link to create.
    */
   protected static function makeSymlink($target, $link) {
-    var_dump($target);
-    var_dump($link);
     if (file_exists($link)) {
       if (!is_link($link)) {
         print("WARNING: {$link} exists already and is not a symlink.\n");
