@@ -50,8 +50,6 @@ class ComposerScripts {
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
-    shell_exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch');
-    shell_exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch');
 
     // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
@@ -64,9 +62,9 @@ class ComposerScripts {
     if (!file_exists('web/sites/simpletest/browser_output')) {
       mkdir('web/sites/simpletest/browser_output', 0777, TRUE);
     }
-
     // Symlink the simpletest folder into the Drupal core git repo.
     static::makeSymlink('../../../web/sites/simpletest', 'repos/drupal/sites/simpletest');
+    static::makeSymlink( '../../../repos/drupal/sites/default/files', 'web/sites/default/files');
   }
 
   /**

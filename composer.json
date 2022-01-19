@@ -30,10 +30,10 @@
     ],
     "require": {
         "composer/installers": "^1.9",
-        "drupal/core-composer-scaffold": "*",
-        "drupal/drupal": "*",
         "drupal/core": "*",
+        "drupal/core-composer-scaffold": "*",
         "drupal/core-dev": "*",
+        "drupal/drupal": "*",
         "drush/drush": "^10.3.6 || ^11.x-dev",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "^4.4 | ^5.1"
@@ -41,7 +41,13 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-vendor-hardening": true,
+            "drupal/core-project-message": true,
+            "drupal/core-composer-scaffold": true
+        }
     },
     "scripts": {
         "post-root-package-install": [
@@ -60,6 +66,10 @@
         "drupal-scaffold": {
             "locations": {
                 "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/index.php": "scaffold/web/index.php",
+                "[web-root]/update.php": "scaffold/web/update.php"
             }
         },
         "installer-paths": {
