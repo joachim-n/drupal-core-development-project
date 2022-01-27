@@ -89,6 +89,12 @@ The composer.json at the project root uses a Composer path repository so that wh
 
 Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
 
+Additionally, the paths to the drupal/core-recommended and drupal/core-dev
+packages are defined as path repositories, so that the package versions which
+are fixed in those metapackages are respected in the project. This means the
+same versions are installed as if installing Composer packages on a plain git
+clone of Drupal core.
+
 ### Manual Installation
 
 Clone the repository for this template into, say, 'drupal-dev'.

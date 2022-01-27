@@ -17,6 +17,14 @@
         },
         {
             "type": "path",
+            "url": "repos/drupal/composer/Metapackage/CoreRecommended"
+        },
+        {
+            "type": "path",
+            "url": "repos/drupal/composer/Metapackage/DevDependencies"
+        },
+        {
+            "type": "path",
             "url": "repos/drupal/composer/Plugin/ProjectMessage"
         },
         {
@@ -34,6 +42,7 @@
         "drupal/drupal": "*",
         "drupal/core": "*",
         "drupal/core-dev": "*",
+        "drupal/core-recommended": "*",
         "drush/drush": "^10.3.6 || ^11.x-dev",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "^4.4 | ^5.1"
