@@ -134,7 +134,7 @@ clone of the template repository.
 In a separate location, do:
 
 ```
-$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url": "/path/to/git/clone/of/project/template/", "type": "vcs"}'
+$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
 ```
 
 ### Workarounds
