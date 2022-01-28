@@ -85,9 +85,13 @@ you're working on this project template or debugging it.
 
 ### How it works
 
-The composer.json at the project root uses a Composer path repository so that when the drupal/drupal package is installed, it's symlinked in from the Drupal core git clone, at the branch that the clone has checked out.
+The composer.json at the project root uses a Composer path repository so that
+when the drupal/drupal package is installed, it's symlinked in from the Drupal
+core git clone, at the branch that the clone has checked out.
 
-Drupal core itself defines path repositories in its top-level composer.json. These need to be overridden in the project root composer.json so they point to inside the Drupal core git clone.
+Drupal core itself defines path repositories in its top-level composer.json.
+These need to be overridden in the project root composer.json so they point to
+inside the Drupal core git clone.
 
 Additionally, the paths to the drupal/core-recommended and drupal/core-dev
 packages are defined as path repositories, so that the package versions which
@@ -139,11 +143,14 @@ $ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_
 
 ### Workarounds
 
-Several workarounds are necessary to make Drupal core work correctly when symlinked into the project. These are all taken care of by Composer scripts during installation. Details are below.
+Several workarounds are necessary to make Drupal core work correctly when
+symlinked into the project. These are all taken care of by Composer scripts
+during installation. Details are below.
 
 #### Vendor folder
 
-The vendor folder has to be symlinked into the Drupal core repository, because otherwise code in core that expects to find a Composer autoloader fails.
+The vendor folder has to be symlinked into the Drupal core repository, because
+otherwise code in core that expects to find a Composer autoloader fails.
 
 This is done by a Composer script after initial installation. The manual command
 is:
@@ -154,10 +161,13 @@ ln -s ../../vendor ./repos/drupal/vendor
 
 #### App root files patches
 
-The index.php and update.php scaffold files have to be patched after they have been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal app root as incorrectly being inside the Drupal core git clone, which means it can't find the settings.php file.
+The index.php and update.php scaffold files have to be patched after they have
+been copied to web/index.php, because otherwise DrupalKernel guesses the Drupal
+app root as incorrectly being inside the Drupal core git clone, which means it
+can't find the settings.php file.
 
-This is done by a Composer script after initial installation. The manual commands
-are:
+This is done by a Composer script after initial installation. The manual
+commands are:
 
 ```
 cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
@@ -168,11 +178,17 @@ See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
 #### Simpletest folder
 
-When running browser tests, the initial setup of Drupal in FunctionalTestSetupTrait::prepareEnvironment() creates a site folder using the real file locations with symlinks resolved, thus `repos/drupal/sites/simpletest`, but during the request to the test site, Drupal looks in `/web/sites/simpletest`.
+When running browser tests, the initial setup of Drupal in
+FunctionalTestSetupTrait::prepareEnvironment() creates a site folder using the
+real file locations with symlinks resolved, thus
+`repos/drupal/sites/simpletest`, but during the request to the test site, Drupal
+looks in `/web/sites/simpletest`.
 
-Additionally, the HTML files output from Browser tests are written into the Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect.
+Additionally, the HTML files output from Browser tests are written into the
+Drupal core git clone, and so the URLs shown in PHPUnit output are incorrect.
 
-The fix for both of these is to create the simpletest site folder in the web root and symlink it into the Drupal core git clone.
+The fix for both of these is to create the simpletest site folder in the web
+root and symlink it into the Drupal core git clone.
 
 This is done by a Composer script after initial installation. The manual command
 is:
