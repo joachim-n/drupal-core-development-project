@@ -84,6 +84,8 @@ class ComposerScripts {
     if (file_exists($link)) {
       if (!is_link($link)) {
         print("WARNING: {$link} exists already and is not a symlink.\n");
+
+        return;
       }
 
       // Use realpath() on the target in case the symlink is absolute while the
