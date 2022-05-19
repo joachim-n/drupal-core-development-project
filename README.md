@@ -27,12 +27,6 @@ Once the installation is complete, you can install Drupal as normal, either with
 
 ## Limitations
 
-Most Drush commands work, but `drush cr` does *not*. To rebuild the Drupal
-container and clear caches, install Devel module and use its menu items instead.
-
-A fix is being worked on: see
-https://www.drupal.org/project/drupal/issues/1792310.
-
 During some Composer commands you may see multiple copies of this error message:
 
 > Could not scan for classes inside [Drupal class filename].
@@ -147,6 +141,9 @@ Several workarounds are necessary to make Drupal core work correctly when
 symlinked into the project. These are all taken care of by Composer scripts
 during installation. Details are below.
 
+Most if not all of these will no longer be needed once
+https://www.drupal.org/project/drupal/issues/1792310 is fixed.
+
 #### Vendor folder
 
 The vendor folder has to be symlinked into the Drupal core repository, because
@@ -175,6 +172,15 @@ cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 ```
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
+
+#### Drush rebuild command
+
+The Drush cache:rebuild command does not work correctly if contrib modules are
+present, because it calls drupal_rebuild() which lets DrupalKernel guess the
+app root incorrectly.
+
+This project template contains a /drush folder which has a command class which
+replaces that command with custom code to correctly handle the app root.
 
 #### Simpletest folder
 
