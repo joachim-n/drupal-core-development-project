@@ -72,6 +72,20 @@ Then change the `bootstrap` attribute so the path is correct:
 <phpunit bootstrap="web/core/tests/bootstrap.php"
 ```
 
+### Debugging
+
+You can set up debugging in an IDE that's open at the repos/drupal folder, so
+that it recognises the process being run from the project root.
+
+For example, in VSCode, this is done as follows in the debugger configuration:
+
+```
+"pathMappings": {
+  // Make this work with the root project.
+  "/ABSOLUTE/PATH/TO/PROJECT/repos/drupal": "${workspaceRoot}"
+}
+```
+
 ## Technical details
 
 The rest of this document is gory technical details you only need to know if
