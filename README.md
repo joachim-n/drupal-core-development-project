@@ -27,6 +27,9 @@ Once the installation is complete, you can install Drupal as normal, either with
 
 ## Limitations
 
+Contrib and custom module tests can't be run. For details, see
+https://github.com/joachim-n/drupal-core-development-project/issues/14.
+
 During some Composer commands you may see multiple copies of this error message:
 
 > Could not scan for classes inside [Drupal class filename].
