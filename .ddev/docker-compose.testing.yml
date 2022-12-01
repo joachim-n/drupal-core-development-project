@@ -1,0 +1,26 @@
+version: '3.6'
+services:
+  web:
+    links:
+      - chromedriver:$DDEV_HOSTNAME
+    environment:
+      SYMFONY_DEPRECATIONS_HELPER: weak
+      SIMPLETEST_DB_MYSQL: &simpletest_db_mysql mysql://db:db@db:3306/db
+      SIMPLETEST_DB_SQLITE: &simpletest_db_sqlite sqlite://tmp/sites/simpletest/simpletest.db
+      SIMPLETEST_DB: *simpletest_db_sqlite
+      SIMPLETEST_BASE_URL: &base_url http://${DDEV_HOSTNAME}
+      MINK_DRIVER_ARGS_WEBDRIVER: &mink_driver_args '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"], "w3c": false}}, "http://chromedriver:9515"]'
+      BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
+      BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
+      DTT_BASE_URL: *base_url
+      DTT_MINK_DRIVER_ARGS: *mink_driver_args
+
+  chromedriver:
+    image:  drupalci/webdriver-chromedriver:production
+    container_name: ddev-${DDEV_SITENAME}-chromedriver
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    external_links:
+      - ddev-router:${DDEV_SITENAME}.${DDEV_TLD}
+    networks: [default, ddev_default]
