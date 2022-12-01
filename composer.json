@@ -37,15 +37,15 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.9",
+        "composer/installers": "^2",
         "drupal/core-composer-scaffold": "*",
         "drupal/drupal": "*",
         "drupal/core": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
-        "drush/drush": "^10.3.6 || ^11.x-dev",
+        "drush/drush": "^11.x-dev",
         "phpspec/prophecy-phpunit": "*",
-        "symfony/var-dumper": "^4.4 | ^5.1"
+        "symfony/var-dumper": "^6.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -55,7 +55,9 @@
             "composer/installers": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
-            "drupal/core-composer-scaffold": true
+            "drupal/core-composer-scaffold": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {
