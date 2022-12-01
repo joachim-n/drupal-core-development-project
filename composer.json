@@ -55,7 +55,9 @@
             "composer/installers": true,
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
-            "drupal/core-composer-scaffold": true
+            "drupal/core-composer-scaffold": true,
+            "phpstan/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {

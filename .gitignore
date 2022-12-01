@@ -1,2 +1,7 @@
 # Ignore Drupal Core Repo
 repos/drupal
+# Ignore Vendor Directory
+vendor/
+composer.lock
+.gitattributes
+.editorconfig

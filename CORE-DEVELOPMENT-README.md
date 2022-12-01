@@ -7,3 +7,11 @@
 5. ddev composer require drupal/admin_toolbar drupal/devel
 6. ddev phpcs repo/drupal/core/<PATH_TO_FILE> (from project root)
 7. cd repos/drupal ; git status to track core changes
+
+## Commands Usage
+
+ddev phpunit repos/drupal/core/modules/action/tests/src/Functional
+ddev phpcs repos/drupal/core/modules/action/
+
+## TODO
+1. Add PHPStan,Rector commands
