@@ -245,6 +245,7 @@ location.
 2. ddev phpcbf repo/drupal/core/<PATH_TO_FILE> (from project root)
 3. ddev phpunit repo/drupal/core/<PATH_TO_FILE> (from project root)
 4. ddev code-check (ddev equivalent of running `sh core/scripts/dev/commit-code-check.sh`)
+5. ddev drush [arguments] (from project root)
 
 ### TODO
 

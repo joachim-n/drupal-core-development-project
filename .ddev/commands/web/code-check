@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## This script performs code quality checks.
+## Description: This script performs code quality checks.
 ## Usage: code-check [flags]
 ## Example: "ddev code-check" or "ddev code-check --cached"
 
@@ -17,6 +17,11 @@
 # - ESLint checks JavaScript and YAML files.
 # - Stylelint checks CSS files.
 # - Checks .pcss.css and .css files are equivalent.
+
+# Installs dependencies if not already run.
+if [ ! -d /var/www/html/repos/drupal/core/node_modules ]; then
+  yarn --cwd /var/www/html/repos/drupal/core install
+fi
 
 TOP_LEVEL="/var/www/html/repos/drupal"
 cd $TOP_LEVEL
