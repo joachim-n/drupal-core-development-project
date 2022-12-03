@@ -16,7 +16,7 @@ It allows:
 To install a Drupal project for working on Drupal core:
 
 ```
-$ composer create-project joachim-n/drupal-core-development-project
+composer create-project joachim-n/drupal-core-development-project
 ```
 
 Composer will clone Drupal core into a 'repos/drupal' directory within the
@@ -25,10 +25,13 @@ project, and then symlink that into the project when it installs Drupal core.
 Once the installation is complete, you can install Drupal as normal, either with
 `drush si` or with the web UI.
 
+See [Core Development Using DDEV](#core-development-using-ddev) section for
+guide to develop core with DDEV.
+
 ## Limitations
 
 Contrib and custom module tests can't be run. For details, see
-https://github.com/joachim-n/drupal-core-development-project/issues/14.
+<https://github.com/joachim-n/drupal-core-development-project/issues/14>.
 
 During some Composer commands you may see multiple copies of this error message:
 
@@ -134,8 +137,8 @@ $ composer install
 The Drupal core git clone will be clean apart from:
 
 ```
-	sites/default/settings.php
-	vendor
+ sites/default/settings.php
+ vendor
 ```
 
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
@@ -149,7 +152,7 @@ clone of the template repository.
 In a separate location, do:
 
 ```
-$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
+composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
 ```
 
 ### Workarounds
@@ -159,7 +162,7 @@ symlinked into the project. These are all taken care of by Composer scripts
 during installation. Details are below.
 
 Most if not all of these will no longer be needed once
-https://www.drupal.org/project/drupal/issues/1792310 is fixed.
+<https://www.drupal.org/project/drupal/issues/1792310> is fixed.
 
 #### Vendor folder
 
@@ -188,7 +191,7 @@ cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
 cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 ```
 
-See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
+See <https://www.drupal.org/project/drupal/issues/3188703> for more detail.
 
 #### Drush rebuild command
 
@@ -226,3 +229,23 @@ ln -s ../../../web/sites/simpletest repos/drupal/sites
 Drupal's /composer folder is not symlinked and therefore isn't visible to
 Composer. It's needed for some tests, and so is declared as an autoload
 location.
+
+## Core Development Using DDEV
+
+1. Clone this repository by using `git clone --branch=main https://github.com/joachim-n/drupal-core-development-project.git`
+2. cd repos
+3. git clone --branch=10.1.x <https://git.drupalcode.org/project/drupal.git> drupal
+4. ddev composer install (from project root)
+5. ddev composer require drupal/admin_toolbar drupal/devel
+6. cd repos/drupal ; `git status` to track core changes
+
+### DDEV Commands Usage
+
+1. ddev phpcs repo/drupal/core/<PATH_TO_FILE> (from project root)
+2. ddev phpcbf repo/drupal/core/<PATH_TO_FILE> (from project root)
+3. ddev phpunit repo/drupal/core/<PATH_TO_FILE> (from project root)
+4. ddev code-check (ddev equivalent of running `sh core/scripts/dev/commit-code-check.sh`)
+
+### TODO
+
+1. Add DDEV PHPStan,Rector Commands
