@@ -19,7 +19,7 @@
 # - Checks .pcss.css and .css files are equivalent.
 
 # Installs dependencies if not already run.
-if [ ! -d /var/www/html/repos/drupal/core/node_modules ]; then
+if [ ! -d /var/www/html/repos/drupal/core/node_modules/.bin ]; then
   yarn --cwd /var/www/html/repos/drupal/core install
 fi
 
@@ -92,7 +92,7 @@ if [[ "$BRANCH" != "" ]]; then
 elif [[ "$CACHED" == "0" ]]; then
   # For DrupalCI patch testing or when running without --cached or --branch,
   # list of all changes in the working directory.
-  FILES=$(git ls-files --other --modified --exclude-standard --exclude=vendor --exclude=node_modules --exclude=sites/simpletest)
+  FILES=$(git ls-files --other --modified --exclude-standard --exclude=vendor --exclude=node_modules --exclude=sites/simpletest --exclude=*.patch)
 else
   # Check staged files only.
   if git rev-parse --verify HEAD >/dev/null 2>&1

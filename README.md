@@ -250,3 +250,7 @@ location.
 ### TODO
 
 1. Add DDEV PHPStan,Rector Commands
+
+### Tips
+
+1. ddev drush si --site-name=drupal-145353
