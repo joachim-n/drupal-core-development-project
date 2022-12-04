@@ -10,8 +10,18 @@ services:
       SIMPLETEST_DB: *simpletest_db_sqlite
       SIMPLETEST_BASE_URL: &base_url http://${DDEV_HOSTNAME}
       MINK_DRIVER_ARGS_WEBDRIVER: &mink_driver_args '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"], "w3c": false}}, "http://chromedriver:9515"]'
-      BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
-      BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
+      - BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
+      - BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
+      # Nightwatch
+      DRUPAL_TEST_BASE_URL: http://web
+      DRUPAL_TEST_DB_URL: mysql://db:db@db/db
+      DRUPAL_TEST_WEBDRIVER_HOSTNAME: selenium-chrome
+      DRUPAL_TEST_WEBDRIVER_PORT: 4444
+      DRUPAL_TEST_WEBDRIVER_PATH_PREFIX: /wd/hub
+      DRUPAL_TEST_CHROMEDRIVER_AUTOSTART: false
+      DRUPAL_NIGHTWATCH_SEARCH_DIRECTORY: ../
+      DRUPAL_NIGHTWATCH_IGNORE_DIRECTORIES: node_modules,vendor,.*,sites/*/files,sites/*/private,sites/simpletest
+      DRUPAL_NIGHTWATCH_OUTPUT: reports/nightwatch
       DTT_BASE_URL: *base_url
       DTT_MINK_DRIVER_ARGS: *mink_driver_args
 
