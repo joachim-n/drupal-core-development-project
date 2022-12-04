@@ -34,7 +34,7 @@ services:
       SIMPLETEST_DB_SQLITE: &simpletest_db_sqlite sqlite://localhost//dev/shm/test.sqlite
       SIMPLETEST_DB: *simpletest_db_sqlite
       SIMPLETEST_BASE_URL: &base_url http://${DDEV_HOSTNAME}
-      MINK_DRIVER_ARGS_WEBDRIVER:  &mink_driver_args '["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]
+      MINK_DRIVER_ARGS_WEBDRIVER:  &mink_driver_args '["chrome", {"browserName":"chrome","chromeOptions":{"w3c":false,"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://selenium-chrome:4444/wd/hub"]'
       BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
       BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
       # Nightwatch
