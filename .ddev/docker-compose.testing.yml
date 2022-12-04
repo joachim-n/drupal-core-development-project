@@ -5,15 +5,16 @@ services:
       - chromedriver:$DDEV_HOSTNAME
     environment:
       SYMFONY_DEPRECATIONS_HELPER: weak
+      # Simpletest
       SIMPLETEST_DB_MYSQL: &simpletest_db_mysql mysql://db:db@db:3306/db
       SIMPLETEST_DB_SQLITE: &simpletest_db_sqlite sqlite://localhost//dev/shm/test.sqlite
       SIMPLETEST_DB: *simpletest_db_sqlite
       SIMPLETEST_BASE_URL: &base_url http://${DDEV_HOSTNAME}
       MINK_DRIVER_ARGS_WEBDRIVER: &mink_driver_args '["chrome", {"browserName":"chrome","goog:chromeOptions":{"args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"], "w3c": false}}, "http://chromedriver:9515"]'
-      - BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
-      - BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
+      BROWSERTEST_OUTPUT_DIRECTORY: /var/www/html/web/sites/simpletest/browser_output
+      BROWSERTEST_OUTPUT_BASE_URL: ${DDEV_PRIMARY_URL}
       # Nightwatch
-      DRUPAL_TEST_BASE_URL: http://web
+      DRUPAL_TEST_BASE_URL: *base_url
       DRUPAL_TEST_DB_URL: mysql://db:db@db/db
       DRUPAL_TEST_WEBDRIVER_HOSTNAME: selenium-chrome
       DRUPAL_TEST_WEBDRIVER_PORT: 4444
