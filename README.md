@@ -235,9 +235,10 @@ location.
 1. Clone this repository by using `git clone --branch=main https://github.com/joachim-n/drupal-core-development-project.git`
 2. cd repos
 3. git clone --branch=10.1.x <https://git.drupalcode.org/project/drupal.git> drupal
-4. ddev composer install (from project root)
-5. ddev composer require drupal/admin_toolbar drupal/devel
-6. cd repos/drupal ; `git status` to track core changes
+4. ddev get drud/ddev-selenium-standalone-chrome (downloads latest chrome driver)
+5. ddev composer install (from project root)
+6. ddev composer require drupal/admin_toolbar drupal/devel
+7. cd repos/drupal ; `git status` to track core changes
 
 ### DDEV Commands Usage
 
