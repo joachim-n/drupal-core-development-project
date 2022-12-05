@@ -5,3 +5,7 @@ vendor/
 composer.lock
 .gitattributes
 .editorconfig
+
+.ddev/docker-compose.selenium-chrome.yaml
+
+web/sites/default/files
