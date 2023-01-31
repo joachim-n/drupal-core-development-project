@@ -4,5 +4,8 @@
 ## Usage: phpcbf [flags] [args]
 ## Example: "ddev phpcbf web/modules/contrib"
 
+TOP_LEVEL="/var/www/html/repos/drupal"
+cd $TOP_LEVEL
+
 /var/www/html/vendor/bin/phpcbf --standard=Drupal,DrupalPractice $@ || \
 echo "Return code ignored"
