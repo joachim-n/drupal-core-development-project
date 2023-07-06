@@ -1,11 +1,8 @@
-# Ignore Drupal Core Repo
-repos/drupal
-# Ignore Vendor Directory
+repos/.DS_Store
+repos/drupal/
 vendor/
-composer.lock
-.gitattributes
-.editorconfig
-
-.ddev/docker-compose.selenium-chrome.yaml
-
-web/sites/default/files
+web/sites/simpletest/
+web/sites/default/files/
+web/modules/contrib/
+.DS_Store
+web/core

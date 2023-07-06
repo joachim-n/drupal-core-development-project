@@ -16,8 +16,13 @@ mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
-nodejs_version: "16"
-
+# webimage_extra_packages: [python3, python3-pip]
+nodejs_version: "18"
+hooks:
+  post-start:
+  - exec: mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS phpunit; GRANT ALL ON phpunit.* to 'db'@'%';"
+    service: db
+  # - exec: pip install mkdocs-material
 # Key features of ddev's config.yaml:
 
 # name: <projectname> # Name of the project, automatically provides
