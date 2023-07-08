@@ -232,7 +232,7 @@ location.
 
 ## Core Development Using DDEV
 
-1. Clone this repository by using `git clone --branch=main https://github.com/joachim-n/drupal-core-development-project.git`
+1. Clone this repository by using `git clone --branch=master https://github.com/bhanu951/drupal-core-development-project.git`
 2. cd repos
 3. git clone --branch=10.1.x <https://git.drupalcode.org/project/drupal.git> drupal
 4. ddev get drud/ddev-selenium-standalone-chrome (downloads latest chrome driver)
