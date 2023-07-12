@@ -3,14 +3,10 @@
 namespace Drush\Commands\core_development;
 
 use Composer\Autoload\ClassLoader;
-use Consolidation\AnnotatedCommand\AnnotationData;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
 use Drush\Commands\DrushCommands;
 use Drush\Drush;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
