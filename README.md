@@ -255,3 +255,5 @@ location.
 ### Tips
 
 1. ddev drush si --site-name=drupal-145353
+
+2. # ping docker.for.mac.localhost

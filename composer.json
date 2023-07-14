@@ -37,17 +37,15 @@
         }
     ],
     "require": {
-        "composer/installers": "^2",
-        "drupal/admin_toolbar": "^3.3",
-        "drupal/core": "*",
+        "composer/installers": "^1.9 | ^2",
         "drupal/core-composer-scaffold": "*",
+        "drupal/drupal": "*",
+        "drupal/core": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
-        "drupal/devel": "^5.0",
-        "drupal/drupal": "*",
-        "drush/drush": "^12",
+        "drush/drush": "^11.6 || ^12",
         "phpspec/prophecy-phpunit": "*",
-        "symfony/var-dumper": "^6.2"
+        "symfony/var-dumper": "^5.4 | ^6.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
