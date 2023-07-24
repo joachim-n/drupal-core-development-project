@@ -57,9 +57,11 @@ class ComposerScripts {
     shell_exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch');
     shell_exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch');
 
-    // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
+    // Symlink the top-level vendor folder into the Drupal core git repo.
     static::makeSymlink('../../vendor', 'repos/drupal/vendor');
+    // Symlink the contrib profiles folder into the Drupal core git repo.
+    static::makeSymlink('../../../web/profiles/contrib', 'repos/drupal/profiles/contrib');
 
     // Create folders for running tests.
     if (!file_exists('web/sites/simpletest')) {
