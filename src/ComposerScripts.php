@@ -60,6 +60,10 @@ class ComposerScripts {
     chdir('..');
     // Symlink the top-level vendor folder into the Drupal core git repo.
     static::makeSymlink('../../vendor', 'repos/drupal/vendor');
+
+    // Symlink the libraries folder into the Drupal core git repo.
+    static::makeSymlink('../../web/libraries', 'repos/drupal/libraries');
+
     // Symlink the contrib profiles folder into the Drupal core git repo.
     static::makeSymlink('../../../web/profiles/contrib', 'repos/drupal/profiles/contrib');
 
