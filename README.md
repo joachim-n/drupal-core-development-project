@@ -22,13 +22,19 @@ $ composer create-project joachim-n/drupal-core-development-project
 Composer will clone Drupal core into a 'repos/drupal' directory within the
 project, and then symlink that into the project when it installs Drupal core.
 
-Drupal core is checked out to its default branch, which is currently 11.x. If
-you want to work on a different branch, use the `--no-install` option with the
-`composer create-project` command, then change the branch of the Drupal core
-clone, then do `composer install`.
+Drupal core is checked out to its default branch, which is currently 11.x. This
+causes complications with Composer because that branch is actually for Drupal
+10.2.x, and so Composer won't install contrib modules.
 
-Once the installation is complete, you can install Drupal as normal, either with
-`drush si` or with the web UI.
+- To install with 11.x, change the drupal/core line in `composer.json` to:
+  `"drupal/core": "11.x-dev as 10.2.x-dev"`.
+
+- To work on a different branch, use the `--no-install` option with the
+  `composer create-project` command, then change the branch of the Drupal core
+  clone, then do `composer install`.
+
+Once the Composer installation is complete, you can install Drupal as normal,
+either with `drush si` or with the web UI.
 
 ## Limitations
 
