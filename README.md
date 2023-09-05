@@ -36,6 +36,19 @@ causes complications with Composer because that branch is actually for Drupal
 Once the Composer installation is complete, you can install Drupal as normal,
 either with `drush si` or with the web UI.
 
+### Installation on DDEV
+
+First, create the folder for your project and `cd` into it. Then:
+
+```
+$ ddev config --project-type=drupal10 --docroot=web --create-docroot
+$ ddev start
+$ ddev composer create joachim-n/drupal-core-development-project
+```
+
+This will give an error message because of Drupal core's 11.x branch. Change the
+drupal/core line as above.
+
 ## Limitations
 
 Contrib and custom module tests can't be run. For details, see
