@@ -66,6 +66,9 @@
         ],
         "post-drupal-scaffold-cmd": [
             "DrupalGitCloneProject\\ComposerScripts::postDrupalScaffold"
+        ],
+        "pre-pool-create": [
+            "DrupalGitCloneProject\\ComposerCoreVersionsLeniency::prePoolCreate"
         ]
     },
     "autoload": {
