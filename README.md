@@ -11,6 +11,11 @@ It allows:
   Toolbar module, can be installed too, but don't affect the composer files
   that are part of Drupal core.
 
+## Roadmap
+
+Get this into Drupal core! See
+https://www.drupal.org/project/drupal/issues/1792310.
+
 ## Installation
 
 To install a Drupal project for working on Drupal core:
