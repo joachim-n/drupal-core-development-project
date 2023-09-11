@@ -26,9 +26,6 @@ Drupal core is checked out to its default branch, which is currently 11.x. This
 causes complications with Composer because that branch is actually for Drupal
 10.2.x, and so Composer won't install contrib modules.
 
-- To install with 11.x, change the drupal/core line in `composer.json` to:
-  `"drupal/core": "11.x-dev as 10.2.x-dev"`.
-
 - To work on a different branch, use the `--no-install` option with the
   `composer create-project` command, then change the branch of the Drupal core
   clone, then do `composer install`.
@@ -45,9 +42,6 @@ $ ddev config --project-type=drupal10 --docroot=web --create-docroot
 $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
 ```
-
-This will give an error message because of Drupal core's 11.x branch. Change the
-drupal/core line as above.
 
 ## Limitations
 
