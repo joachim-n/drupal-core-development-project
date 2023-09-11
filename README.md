@@ -22,13 +22,11 @@ $ composer create-project joachim-n/drupal-core-development-project
 Composer will clone Drupal core into a 'repos/drupal' directory within the
 project, and then symlink that into the project when it installs Drupal core.
 
-Drupal core is checked out to its default branch, which is currently 11.x. This
-causes complications with Composer because that branch is actually for Drupal
-10.2.x, and so Composer won't install contrib modules.
-
-- To work on a different branch, use the `--no-install` option with the
-  `composer create-project` command, then change the branch of the Drupal core
-  clone, then do `composer install`.
+Drupal core is checked out to its default branch, which is currently 11.x (see
+limitations below). To start on a different branch without first checking out
+11.x, you can use the `--no-install` option with the `composer create-project`
+command, then change the branch of the Drupal core clone, then do `composer
+install`.
 
 Once the Composer installation is complete, you can install Drupal as normal,
 either with `drush si` or with the web UI.
@@ -45,8 +43,18 @@ $ ddev composer create joachim-n/drupal-core-development-project
 
 ## Limitations
 
+### Contrib modules on core 11.x branch
+
+Contrib modules can't be installed when Core is checked out to the `11.x`
+branch. For details, see
+https://github.com/joachim-n/drupal-core-development-project/issues/23
+
+### Contrib and custom tests
+
 Contrib and custom module tests can't be run. For details, see
 https://github.com/joachim-n/drupal-core-development-project/issues/14.
+
+### 'Could not scan for classes' error messages
 
 During some Composer commands you may see multiple copies of this error message:
 
