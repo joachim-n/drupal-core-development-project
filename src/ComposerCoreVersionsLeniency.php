@@ -29,11 +29,21 @@ class ComposerCoreVersionsLeniency {
    *   The event.
    */
   public static function prePoolCreate(PrePoolCreateEvent $event) {
-    // @todo Only act if the current branch of drupal/core is 11.x
+    $packages = $event->getPackages();
+
+    // Only act if the current branch of drupal/core is 11.x
+    /** @var \Composer\Package\BasePackage $package */
+    foreach ($packages as $package) {
+      if ($package->getName() == 'drupal/core') {
+        if ($package->getPrettyVersion() != '11.x-dev') {
+          return;
+        }
+      }
+    }
 
     $version_parser = new VersionParser();
 
-    $packages = $event->getPackages();
+    /** @var \Composer\Package\BasePackage $package */
     foreach ($packages as $package) {
       $type = $package->getType();
       if ($type === 'drupal-core') {
