@@ -64,8 +64,14 @@ class ComposerScripts {
     // Symlink the libraries folder into the Drupal core git repo.
     static::makeSymlink('../../web/libraries', 'repos/drupal/libraries');
 
-    // Symlink the contrib profiles folder into the Drupal core git repo.
-    static::makeSymlink('../../../web/profiles/contrib', 'repos/drupal/profiles/contrib');
+    // Symlink external and custom folders into the Drupal core git repo.
+    foreach (['modules', 'profiles', 'sites', 'themes'] as $dir) {
+      foreach (scandir("web/$dir") as $sub) {
+        if (!file_exists("repos/drupal/$dir/$sub") && is_dir("web/$dir/$sub")) {
+          static::makeSymlink("../../../web/$dir/$sub", "repos/drupal/$dir/$sub");
+        }
+      }
+    }
 
     // Create folders for running tests.
     if (!file_exists('web/sites/simpletest')) {
