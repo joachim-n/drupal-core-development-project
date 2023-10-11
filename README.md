@@ -87,13 +87,31 @@ The following are required to run tests.
 The simplest way to run tests with this setup is to put the phpunit.xml file in
 the project root and then run tests from there:
 
+```
 $ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+```
 
-To set this up, copy Drupal core's sample phpunit.xml file to the project root:
+##### On DDEV
 
+1. Copy the `phpunit-ddev.xml` file that this template provides and rename it to
+   `phpunit.xml`:
+
+```
+$ cp phpunit-ddev.xml phpunit.xml
+```
+
+2. Change the BROWSERTEST_OUTPUT_BASE_URL value to the host URL of the project.
+
+##### On other platforms
+
+1. Copy Drupal core's sample `phpunit.xml.dist`` file to the project root and
+rename it to `phpunit.xml`:
+
+```
 $ cp web/core/phpunit.xml.dist phpunit.xml
+```
 
-Then change the `bootstrap` attribute so the path is correct:
+2. Change the `bootstrap` attribute so the path is correct:
 
 ```
 <phpunit bootstrap="web/core/tests/bootstrap.php"
