@@ -7,6 +7,7 @@ use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
 use Drush\Commands\DrushCommands;
 use Drush\Drush;
+use Psr\Container\ContainerInterface as DrushContainer;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,7 +28,7 @@ class DevelopmentProjectCommands extends DrushCommands {
     parent::__construct();
   }
 
-  public static function create(ContainerInterface $container, $drush_container): self {
+  public static function createEarly(DrushContainer $drush_container): self {
     $commandHandler = new static(
         $drush_container->get('loader')
     );
