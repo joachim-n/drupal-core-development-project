@@ -56,6 +56,7 @@
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
             "drupal/core-composer-scaffold": true,
+            "php-http/discovery": true,
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
