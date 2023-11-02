@@ -11,6 +11,11 @@ It allows:
   Toolbar module, can be installed too, but don't affect the composer files
   that are part of Drupal core.
 
+## Roadmap
+
+Get this into Drupal core! See
+https://www.drupal.org/project/drupal/issues/1792310.
+
 ## Installation
 
 To install a Drupal project for working on Drupal core:
@@ -22,16 +27,32 @@ composer create-project joachim-n/drupal-core-development-project
 Composer will clone Drupal core into a 'repos/drupal' directory within the
 project, and then symlink that into the project when it installs Drupal core.
 
-Once the installation is complete, you can install Drupal as normal, either with
-`drush si` or with the web UI.
+Drupal core is checked out to its default branch, which is currently 11.x. To
+start on a different branch without first checking out 11.x, you can use the
+`--no-install` option with the `composer create-project` command, then change
+the branch of the Drupal core clone, then do `composer install`.
 
-See [Core Development Using DDEV](#core-development-using-ddev) section for
-guide to develop core with DDEV.
+Once the Composer installation is complete, you can install Drupal as normal,
+either with `drush si` or with the web UI.
+
+### Installation on DDEV
+
+First, create the folder for your project and `cd` into it. Then:
+
+```
+ddev config --project-type=drupal10 --docroot=web --create-docroot
+ddev start
+ddev composer create joachim-n/drupal-core-development-project
+```
 
 ## Limitations
 
+### Contrib and custom tests
+
 Contrib and custom module tests can't be run. For details, see
-<https://github.com/joachim-n/drupal-core-development-project/issues/14>.
+https://github.com/joachim-n/drupal-core-development-project/issues/14.
+
+### 'Could not scan for classes' error messages
 
 During some Composer commands you may see multiple copies of this error message:
 
@@ -66,13 +87,31 @@ The following are required to run tests.
 The simplest way to run tests with this setup is to put the phpunit.xml file in
 the project root and then run tests from there:
 
-$ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+```
+vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+```
 
-To set this up, copy Drupal core's sample phpunit.xml file to the project root:
+##### On DDEV
 
-$ cp web/core/phpunit.xml.dist phpunit.xml
+1. Copy the `phpunit-ddev.xml` file that this template provides and rename it to
+   `phpunit.xml`:
 
-Then change the `bootstrap` attribute so the path is correct:
+```
+cp phpunit-ddev.xml phpunit.xml
+```
+
+2. Change the BROWSERTEST_OUTPUT_BASE_URL value to the host URL of the project.
+
+##### On other platforms
+
+1. Copy Drupal core's sample `phpunit.xml.dist`` file to the project root and
+rename it to`phpunit.xml`:
+
+```
+cp web/core/phpunit.xml.dist phpunit.xml
+```
+
+2. Change the `bootstrap` attribute so the path is correct:
 
 ```
 <phpunit bootstrap="web/core/tests/bootstrap.php"
@@ -256,4 +295,4 @@ location.
 
 1. ddev drush si --site-name=drupal-145353
 
-2. # ping docker.for.mac.localhost
+2. ping docker.for.mac.localhost
