@@ -1,0 +1,10 @@
+repos/.DS_Store
+repos/drupal/
+vendor/
+web/sites/simpletest/
+web/sites/default/files/
+web/modules/contrib/
+.DS_Store
+web/core
+web/sites/default/
+web/sites/sites.php

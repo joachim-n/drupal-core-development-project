@@ -21,7 +21,7 @@ https://www.drupal.org/project/drupal/issues/1792310.
 To install a Drupal project for working on Drupal core:
 
 ```
-$ composer create-project joachim-n/drupal-core-development-project
+composer create-project joachim-n/drupal-core-development-project
 ```
 
 Composer will clone Drupal core into a 'repos/drupal' directory within the
@@ -40,9 +40,10 @@ either with `drush si` or with the web UI.
 First, create the folder for your project and `cd` into it. Then:
 
 ```
-$ ddev config --project-type=drupal10 --docroot=web --create-docroot
-$ ddev start
-$ ddev composer create joachim-n/drupal-core-development-project
+
+ddev config --project-type=drupal10 --docroot=web --create-docroot
+ddev start
+ddev composer create joachim-n/drupal-core-development-project
 ```
 
 ## Limitations
@@ -88,7 +89,8 @@ The simplest way to run tests with this setup is to put the phpunit.xml file in
 the project root and then run tests from there:
 
 ```
-$ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+
+vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
 ```
 
 ##### On DDEV
@@ -97,7 +99,8 @@ $ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
    `phpunit.xml`:
 
 ```
-$ cp phpunit-ddev.xml phpunit.xml
+cp phpunit-ddev.xml phpunit.xml
+
 ```
 
 2. Change the BROWSERTEST_OUTPUT_BASE_URL value to the host URL of the project.
@@ -105,10 +108,11 @@ $ cp phpunit-ddev.xml phpunit.xml
 ##### On other platforms
 
 1. Copy Drupal core's sample `phpunit.xml.dist`` file to the project root and
-rename it to `phpunit.xml`:
+
+rename it to`phpunit.xml`:
 
 ```
-$ cp web/core/phpunit.xml.dist phpunit.xml
+cp web/core/phpunit.xml.dist phpunit.xml
 ```
 
 2. Change the `bootstrap` attribute so the path is correct:
@@ -176,8 +180,8 @@ $ composer install
 The Drupal core git clone will be clean apart from:
 
 ```
-	sites/default/settings.php
-	vendor
+ sites/default/settings.php
+ vendor
 ```
 
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
@@ -191,7 +195,7 @@ clone of the template repository.
 In a separate location, do:
 
 ```
-$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
+composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
 ```
 
 ### Workarounds
@@ -201,7 +205,7 @@ symlinked into the project. These are all taken care of by Composer scripts
 during installation. Details are below.
 
 Most if not all of these will no longer be needed once
-https://www.drupal.org/project/drupal/issues/1792310 is fixed.
+<https://www.drupal.org/project/drupal/issues/1792310> is fixed.
 
 #### Vendor folder
 
@@ -230,7 +234,7 @@ cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
 cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 ```
 
-See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
+See <https://www.drupal.org/project/drupal/issues/3188703> for more detail.
 
 #### Drush rebuild command
 
@@ -268,3 +272,31 @@ ln -s ../../../web/sites/simpletest repos/drupal/sites
 Drupal's /composer folder is not symlinked and therefore isn't visible to
 Composer. It's needed for some tests, and so is declared as an autoload
 location.
+
+## Core Development Using DDEV
+
+1. Clone this repository by using `git clone --branch=master https://github.com/bhanu951/drupal-core-development-project.git`
+2. cd repos
+3. git clone --branch=10.1.x <https://git.drupalcode.org/project/drupal.git> drupal
+4. ddev get drud/ddev-selenium-standalone-chrome (downloads latest chrome driver)
+5. ddev composer install (from project root)
+6. ddev composer require drupal/admin_toolbar drupal/devel
+7. cd repos/drupal ; `git status` to track core changes
+
+### DDEV Commands Usage
+
+1. ddev phpcs repo/drupal/core/<PATH_TO_FILE> (from project root)
+2. ddev phpcbf repo/drupal/core/<PATH_TO_FILE> (from project root)
+3. ddev phpunit repo/drupal/core/<PATH_TO_FILE> (from project root)
+4. ddev code-check (ddev equivalent of running `sh core/scripts/dev/commit-code-check.sh`)
+5. ddev drush [arguments] (from project root)
+
+### TODO
+
+1. Add DDEV PHPStan,Rector Commands
+
+### Tips
+
+1. ddev drush si --site-name=drupal-145353
+
+2. ping docker.for.mac.localhost

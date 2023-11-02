@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Description: Run phpstan
+## Usage: phpstan [flags] [args]
+## Example: "ddev phpstan web/modules/contrib"
+
+/var/www/html/vendor/bin/phpstan analyze  --configuration=core/phpstan.neon.dist --xdebug --no-ansi --memory-limit=2G $@ || \
+echo "Return code ignored"
