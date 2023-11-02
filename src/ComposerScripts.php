@@ -4,6 +4,10 @@ namespace DrupalGitCloneProject;
 
 use Composer\Script\Event;
 
+// Development: this makes symfony var-dumper work.
+// See https://github.com/composer/composer/issues/7911
+// include_once './vendor/symfony/var-dumper/Resources/functions/dump.php';
+
 /**
  * Provides Composer scripts for setting up Drupal from a git clone.
  */

@@ -43,7 +43,7 @@
         "drupal/core": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
-        "drush/drush": "^12.x-dev",
+        "drush/drush": "^12",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "^5.4 | ^6.2"
     },
@@ -56,9 +56,9 @@
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
             "drupal/core-composer-scaffold": true,
+            "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "php-http/discovery": true
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {
@@ -67,6 +67,9 @@
         ],
         "post-drupal-scaffold-cmd": [
             "DrupalGitCloneProject\\ComposerScripts::postDrupalScaffold"
+        ],
+        "pre-pool-create": [
+            "DrupalGitCloneProject\\ComposerCoreVersionsLeniency::prePoolCreate"
         ]
     },
     "autoload": {
