@@ -73,6 +73,18 @@ class ComposerScripts {
       }
     }
 
+    // Symlink sites files and folders into the the Drupal core git repo.
+    foreach (scandir('web/sites') as $file) {
+      if (!file_exists("repos/drupal/sites/$file")) {
+        static::makeSymlink("../../../web/sites/$file", "repos/drupal/sites/$file");
+      }
+    }
+    foreach (scandir('web/sites/default') as $file) {
+      if (!file_exists("repos/drupal/sites/default/$file")) {
+        static::makeSymlink("../../../../web/sites/default/$file", "repos/drupal/sites/default/$file");
+      }
+    }
+
     // Create folders for running tests.
     if (!file_exists('web/sites/simpletest')) {
       mkdir('web/sites/simpletest', 0777, TRUE);
