@@ -29,6 +29,10 @@
         },
         {
             "type": "path",
+            "url": "repos/drupal/composer/Plugin/Scaffold"
+        },
+        {
+            "type": "path",
             "url": "repos/drupal/composer/Plugin/VendorHardening"
         },
         {
