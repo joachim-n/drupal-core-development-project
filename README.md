@@ -43,7 +43,7 @@ either with `drush si` or with the web UI.
 First, create the folder for your project and `cd` into it. Then:
 
 ```
-$ ddev config --project-type=drupal10 --docroot=web --create-docroot
+$ ddev config --project-type=drupal10 --docroot=web --create-docroot --php-version=8.3 --nodejs-version=20
 $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
 ```
