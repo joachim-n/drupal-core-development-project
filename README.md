@@ -48,6 +48,21 @@ $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
 ```
 
+Open your project's `.ddev/config.yaml` and add:
+
+```
+hooks:
+ post-start:
+   - exec: corepack enable
+```
+
+Finally restart your project:
+
+
+```
+ddev restart
+```
+
 ## Limitations
 
 ### Contrib and custom tests
