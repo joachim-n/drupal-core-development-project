@@ -40,27 +40,14 @@ either with `drush si` or with the web UI.
 
 ### Installation on DDEV
 
-First, create the folder for your project and `cd` into it. Then:
+First, make sure you have upgraded to DDEV version 1.23.0. Next, create a new folder for your project and `cd` into it. Then:
 
 ```
-$ ddev config --project-type=drupal10 --docroot=web --create-docroot --php-version=8.3 --nodejs-version=20
+$ ddev config --project-type=drupal --php-version=8.3
 $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
-```
-
-Open your project's `.ddev/config.yaml` and add:
-
-```
-hooks:
- post-start:
-   - exec: corepack enable
-```
-
-Finally restart your project:
-
-
-```
-ddev restart
+$ ddev config --update
+$ ddev restart
 ```
 
 ## Limitations
