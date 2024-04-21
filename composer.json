@@ -29,10 +29,6 @@
         },
         {
             "type": "path",
-            "url": "repos/drupal/composer/Plugin/Scaffold"
-        },
-        {
-            "type": "path",
             "url": "repos/drupal/composer/Plugin/VendorHardening"
         },
         {
@@ -42,14 +38,13 @@
     ],
     "require": {
         "composer/installers": "^1.9 | ^2",
-        "drupal/core-composer-scaffold": "*",
-        "drupal/drupal": "*",
         "drupal/core": "*",
+        "drupal/core-composer-scaffold": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
-        "drush/drush": "^12",
-        "phpspec/prophecy-phpunit": "*",
-        "symfony/var-dumper": "^5.4 | ^6.2"
+        "drupal/drupal": "*",
+        "drush/drush": "13.x-dev",
+        "phpspec/prophecy-phpunit": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -60,9 +55,9 @@
             "drupal/core-project-message": true,
             "drupal/core-vendor-hardening": true,
             "drupal/core-composer-scaffold": true,
-            "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
         }
     },
     "scripts": {
