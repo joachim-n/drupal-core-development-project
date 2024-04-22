@@ -10,6 +10,9 @@ It allows:
 - other Composer packages you might want, such as Drush, Devel module, and Admin
   Toolbar module, can be installed too, but don't affect the composer files
   that are part of Drupal core.
+- Contrib modules can be installed with Composer (normally Composer would refuse
+  to install them because their info.yml file does not declare compatibility
+  with core 11.x).
 
 ## Roadmap
 
@@ -151,6 +154,9 @@ packages are defined as path repositories, so that the package versions which
 are fixed in those metapackages are respected in the project. This means the
 same versions are installed as if installing Composer packages on a plain git
 clone of Drupal core.
+
+Contrib modules are made installable with the ComposerCoreVersionsLeniency
+Composer script.
 
 ### Manual Installation
 
