@@ -51,6 +51,16 @@ $ ddev config --update
 $ ddev restart
 ```
 
+### Installation on DDEV with the justafish/ddev-drupal-core-dev DDEV addon
+
+To use the justafish/ddev-drupal-core-dev DDEV addon, you need to make the
+following changes to the installation instructions for that addon:
+
+- For `ddev config`, specify --project-type=drupal
+- Do `composer install` before doing `ddev get justafish/ddev-drupal-core-dev`
+- Do `ln -s web/autoload.php .` so the addon's commands find the autoloader.
+- TODO: Browser can't find Drupal.
+
 ## Limitations
 
 ### Contrib and custom tests
