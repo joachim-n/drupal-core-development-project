@@ -13,6 +13,8 @@ It allows the following:
 - Contrib modules can be installed with Composer (normally Composer would refuse
   to install them because their info.yml file does not declare compatibility
   with core 11.x).
+- Other packages, including contrib modules, can be installed as git clones to
+  develop them in tandem with Drupal core.
 
 ## Roadmap
 
@@ -51,6 +53,36 @@ $ ddev config --update
 $ ddev restart
 ```
 
+### Installing other packages
+
+You can install any Composer package as you would with a normal project. This
+will not affect Drupal core.
+
+To work with Composer, you need to be in the root directory of the project, not
+in the Drupal core folders.
+
+If Drupal core is checked out at a feature branch, Composer may complain that
+dependencies are not met, because it does not see the feature branch as
+satisfying the dependency. You can either:
+
+- Temporarily switch Drupal code back to the main branch, do Composer tasks,
+  then switch it back.
+- Define the version in the `repositories` section of the project composer.json.
+- Define a branch alias in the project composer.json.
+
+#### Installing other packages from path repositories
+
+You can install additional packages from a path repository, in the same way that
+Drupal core is installed (although other packages will no require all the tweaks
+that Drupal core does!). This can be useful to develop packages and modules in
+tandem with core.
+
+1. Create a git clone of the module or package. The `repos/` folder can be used
+  for this.
+2. Define a path respository for the package. See
+   https://getcomposer.org/doc/05-repositories.md#path for details.
+3. Do `composer require` for the package.
+
 ## Limitations
 
 ### Contrib and custom tests
@@ -75,14 +107,11 @@ symlinked into it.
 
 ### Managing the Composer project
 
-You can install any Composer packages you like, including Drupal contrib
-modules, without affecting the git clone of Drupal core. To work with Composer,
-you need to be in the root directory of the project.
-
-Changes to the git clone's composer.json will be taken into account by Composer.
-So for example, if pulling from the main branch of Drupal core changes Composer
-dependencies, and in particular if you change to a different core major or minor
-branch, you should run `composer update` on the project to install these.
+Changes to the Drupal core git clone's composer.json will be taken into account
+by Composer. So for example, if pulling from the main branch of Drupal core
+changes Composer dependencies, and in particular if you change to a different
+core major or minor branch, you should run `composer update` on the project to
+install these.
 
 ### Running tests
 
