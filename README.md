@@ -100,7 +100,7 @@ These are harmless and can be ignored.
 
 ## Developing Drupal core
 
-You can use the Drupal core git clone at 'repos/drupal/' in any way you like:
+You can use the Drupal core git clone at `repos/drupal/` in any way you like:
 create feature branches, clone from drupal.org issue forks, and so on. Changes
 you make to files in the git clone affect the project, since the git clone is
 symlinked into it.
@@ -154,7 +154,7 @@ $ cp web/core/phpunit.xml.dist phpunit.xml
 
 ### Debugging
 
-You can set up debugging in an IDE that's open at the repos/drupal folder, so
+You can set up debugging in an IDE that's open at the `repos/drupal` folder, so
 that it recognises the process being run from the project root.
 
 For example, in VSCode, this is done as follows in the debugger configuration:
