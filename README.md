@@ -2,14 +2,14 @@
 
 This is a Composer project template for developing Drupal core.
 
-It allows:
+It allows the following:
 
-- a clean git clone of Drupal core.
+- A clean git clone of Drupal core.
 - Composer dependencies of Drupal core are installed, so Drupal can be installed
   and run as normal.
-- other Composer packages you might want, such as Drush, Devel module, and Admin
-  Toolbar module, can be installed too, but don't affect the composer files
-  that are part of Drupal core.
+- Other Composer packages you might want, such as Drush, Devel module, Admin
+  Toolbar module, and Devel Accessibility can be installed too, but don't affect
+  the composer files that are part of Drupal core.
 - Contrib modules can be installed with Composer (normally Composer would refuse
   to install them because their info.yml file does not declare compatibility
   with core 11.x).
