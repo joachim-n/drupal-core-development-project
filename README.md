@@ -166,7 +166,7 @@ $ cp web/core/phpunit.xml.dist phpunit.xml
 2. Change the `bootstrap` attribute so the path is correct:
 
 ```
-<phpunit bootstrap="web/core/tests/bootstrap.php"
+bootstrap="web/core/tests/bootstrap.php"
 ```
 
 ### Debugging
