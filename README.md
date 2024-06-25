@@ -23,6 +23,8 @@ https://www.drupal.org/project/drupal/issues/1792310.
 
 ## Installation
 
+### Basic installation
+
 To install a Drupal project for working on Drupal core:
 
 ```
@@ -53,7 +55,22 @@ $ ddev config --update
 $ ddev restart
 ```
 
-### Installing other packages
+### Installation on DDEV with the justafish/ddev-drupal-core-dev DDEV addon
+
+To use the justafish/ddev-drupal-core-dev DDEV addon, you need to make the
+following changes to the installation instructions for that addon:
+
+- For `ddev config`, specify --project-type=drupal
+- Do `composer install` before doing `ddev get justafish/ddev-drupal-core-dev`
+- Do `ln -s web/autoload.php .` so the addon's `ddev drupal` command find the
+  autoloader. (There is a merge request to remove the need for this:
+  https://github.com/justafish/ddev-drupal-core-dev/pull/35)
+- DO NOT do `drupal install`. Instead, do `ddev drush si --db-url=sqlite://sites/default/files/.ht.sqlite?module=sqlite -y`
+  (You might need to manually create web/sites/default/files first)
+  The `drupal install` command does not work when the drupal package is
+  symlinked in by Composer.
+
+## Installing other packages
 
 You can install any Composer package as you would with a normal project. This
 will not affect Drupal core.
@@ -70,7 +87,7 @@ satisfying the dependency. You can either:
 - Define the version in the `repositories` section of the project composer.json.
 - Define a branch alias in the project composer.json.
 
-#### Installing other packages from path repositories
+### Installing other packages from path repositories
 
 You can install additional packages from a path repository, in the same way that
 Drupal core is installed (although other packages will no require all the tweaks
