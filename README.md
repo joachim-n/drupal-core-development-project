@@ -70,6 +70,9 @@ following changes to the installation instructions for that addon:
   The `drupal install` command does not work when the drupal package is
   symlinked in by Composer.
 
+To run PHPUnit tests, you will need to tweak the DDEV phpunit command until
+https://github.com/justafish/ddev-drupal-core-dev/pull/37 is fixed.
+
 ## Installing other packages
 
 You can install any Composer package as you would with a normal project. This
