@@ -98,10 +98,23 @@ that Drupal core does!). This can be useful to develop packages and modules in
 tandem with core.
 
 1. Create a git clone of the module or package. The `repos/` folder can be used
-  for this.
+   for this. It's simplest to start off from a main branch so that Composer sees
+   this as the installed version, and dependencies work properly.
 2. Define a path respository for the package. See
    https://getcomposer.org/doc/05-repositories.md#path for details.
 3. Do `composer require` for the package.
+
+You can now switch the package to a feature branch, such as one from a merge
+request, in order to work on a feature or bug.
+
+If you need to perform Composer operations, Composer may complain that the
+feature branch does not satisfy requirements. You can do one of:
+
+* Check out the main branch with git, perform the Composer operations, then
+  return to the feature branch.
+* Define the version that Composer sees for this package by specifying the
+  "versions" option in the declaration of the path repository in
+  `composer.json`.
 
 ## Limitations
 
