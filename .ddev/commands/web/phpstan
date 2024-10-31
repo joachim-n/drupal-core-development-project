@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## Description: Run phpstan
+## Usage: phpstan [flags] [args]
+## Example: "ddev phpstan core/modules/migrate_drupal_ui"
+
+TOP_LEVEL="/var/www/html/repos/drupal"
+cd $TOP_LEVEL
+
+/var/www/html/vendor/bin/phpstan analyze  --configuration="$TOP_LEVEL/core/phpstan.neon.dist" --xdebug --no-ansi --memory-limit=2G $@ || \
+echo "Return code ignored"

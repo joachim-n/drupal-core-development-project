@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Description: Performs a default drupal installation
+## Usage: install
+## Example: "ddev install"
+
+drush site:install standard --account-name=admin --account-pass=admin --site-name="Drupal 11" -y
+# drush en admin_toolbar admin_toolbar_tools devel

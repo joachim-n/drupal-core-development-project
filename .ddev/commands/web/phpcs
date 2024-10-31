@@ -1,0 +1,11 @@
+#!/bin/bash
+
+## Description: Run phpcs
+## Usage: phpcs [flags] [args]
+## Example: "ddev phpcs web/modules/contrib"
+
+TOP_LEVEL="/var/www/html/repos/drupal"
+cd $TOP_LEVEL
+
+/var/www/html/vendor/bin/phpcs --standard=Drupal,DrupalPractice $@ || \
+echo "Return code ignored"
