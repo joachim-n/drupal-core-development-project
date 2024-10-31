@@ -1,0 +1,18 @@
+#!/bin/bash
+
+## Description: This script performs cspell checks.
+## Usage: cspell-check [flags]
+## Example: "ddev cspell-check"
+
+# Installs dependencies if not already run.
+if [ ! -d /var/www/html/repos/drupal/core/node_modules/.bin ]; then
+
+  corepack enable
+
+  yarn --cwd /var/www/html/repos/drupal/core install
+fi
+
+TOP_LEVEL="/var/www/html/repos/drupal/core"
+cd $TOP_LEVEL
+
+yarn run spellcheck:core --no-must-find-files --cache --cache-strategy content
