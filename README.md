@@ -21,11 +21,6 @@ It allows the following:
 Get this into Drupal core! See
 https://www.drupal.org/project/drupal/issues/1792310.
 
-## Roadmap
-
-Get this into Drupal core! See
-https://www.drupal.org/project/drupal/issues/1792310.
-
 ## Installation
 
 ### Basic installation
