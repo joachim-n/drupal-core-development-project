@@ -3,23 +3,22 @@ docroot: web
 php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
-additional_hostnames: []
+additional_hostnames:
+ - drupal-core-testing
 additional_fqdns: []
 database:
     type: mariadb
     version: "10.11"
+hooks:
+    post-start:
+        - exec: mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS phpunit; GRANT ALL ON phpunit.* to 'db'@'%';"
+          service: db
+project_tld: local
 use_dns_when_possible: true
 composer_version: "2"
-corepack_enable: true
-nodejs_version: "20"
-project_tld: local
 web_environment:
     - BROWSERTEST_OUTPUT_DIRECTORY=/var/www/html/web/sites/simpletest/browser_output
     - BROWSERTEST_OUTPUT_BASE_URL=https://drupal-core-testing.local
     - SIMPLETEST_BASE_URL=${DDEV_PRIMARY_URL}
-    # - SIMPLETEST_DB=sqlite://tmp/sites/simpletest/db.sqlite
     - SIMPLETEST_DB=mysql://root:root@db/phpunit
-hooks:
-  post-start:
-  - exec: mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS phpunit; GRANT ALL ON phpunit.* to 'db'@'%';"
-    service: db
+corepack_enable: true
