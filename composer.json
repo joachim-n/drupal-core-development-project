@@ -83,7 +83,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Drupal\\Composer\\": "repos/drupal/composer"
+            "Drupal\\Composer\\": "repos/drupal/composer",
+            "Drupal\\PHPStan\\Rules\\": "web/core/tests/PHPStan/Rules"
         }
     },
     "extra": {
