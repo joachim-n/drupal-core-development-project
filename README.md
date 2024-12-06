@@ -27,8 +27,8 @@ https://www.drupal.org/project/drupal/issues/1792310.
 
 To install a Drupal project for working on Drupal core:
 
-```
-$ composer create-project joachim-n/drupal-core-development-project
+```bash
+composer create-project joachim-n/drupal-core-development-project
 ```
 
 Composer will clone Drupal core into a 'repos/drupal' directory within the
@@ -47,12 +47,12 @@ either with `drush si` or with the web UI.
 First, make sure your DDEV version is at least 1.23.0. Next, create a new folder
 for your project and `cd` into it. Then:
 
-```
-$ ddev config --project-type=drupal --php-version=8.3
-$ ddev start
-$ ddev composer create joachim-n/drupal-core-development-project
-$ ddev config --update
-$ ddev restart
+``` bash
+ddev config --project-type=drupal --php-version=8.3
+ddev start
+ddev composer create joachim-n/drupal-core-development-project
+ddev config --update
+ddev restart
 ```
 
 ### Installation on DDEV with the justafish/ddev-drupal-core-dev DDEV addon
@@ -155,8 +155,8 @@ The following are required to run tests.
 The simplest way to run tests with this setup is to put the phpunit.xml file in
 the project root and then run tests from there:
 
-```
-$ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
+``` bash
+vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
 ```
 
 ##### On DDEV
@@ -164,8 +164,8 @@ $ vendor/bin/phpunit web/core/PATH-TO-TEST-FILE/TestFile.php
 1. Copy the `phpunit-ddev.xml` file that this template provides and rename it to
    `phpunit.xml`:
 
-```
-$ cp phpunit-ddev.xml phpunit.xml
+``` bash
+cp phpunit-ddev.xml phpunit.xml
 ```
 
 2. Change the BROWSERTEST_OUTPUT_BASE_URL value to the host URL of the project.
@@ -175,8 +175,8 @@ $ cp phpunit-ddev.xml phpunit.xml
 1. Copy Drupal core's sample `phpunit.xml.dist`` file to the project root and
 rename it to `phpunit.xml`:
 
-```
-$ cp web/core/phpunit.xml.dist phpunit.xml
+``` bash
+cp web/core/phpunit.xml.dist phpunit.xml
 ```
 
 2. Change the `bootstrap` attribute so the path is correct:
@@ -192,7 +192,7 @@ that it recognises the process being run from the project root.
 
 For example, in VSCode, this is done as follows in the debugger configuration:
 
-```
+``` json
 "pathMappings": {
   // Make this work with the root project.
   "/ABSOLUTE/PATH/TO/PROJECT/repos/drupal": "${workspaceRoot}"
@@ -227,28 +227,28 @@ Composer script.
 
 Clone the repository for this template into, say, 'drupal-dev'.
 
-```
-$ cd drupal-dev
+``` bash
+cd drupal-dev
 
 # Create a folder in which to store git clones, which Composer will symlink in.
-$ mkdir repos
-$ cd repos
+mkdir repos
+cd repos
 
 # Clone Drupal core, to whatever branch you like.
-$ git clone --branch 9.2.x https://git.drupalcode.org/project/drupal.git
+git clone --branch 11.x https://git.drupalcode.org/project/drupal.git
 
 # Go back to the project root.
-$ cd ..
+cd ..
 
 # Install packages with Composer.
-$ composer install
+composer install
 ```
 
 The Drupal core git clone will be clean apart from:
 
-```
-	sites/default/settings.php
-	vendor
+``` bash
+ sites/default/settings.php
+ vendor
 ```
 
 Since it doesn't have a .gitignore at the top level, you can add one to ignore
@@ -261,8 +261,8 @@ clone of the template repository.
 
 In a separate location, do:
 
-```
-$ composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
+``` bash
+composer create-project joachim-n/drupal-core-development-project NEW_PROJECT_DIRECTORY --stability=dev --repository='{"url":"/path/to/git/clone/of/project/template/","type":"vcs"}'
 ```
 
 ### Workarounds
@@ -282,7 +282,7 @@ otherwise code in core that expects to find a Composer autoloader fails.
 This is done by a Composer script after initial installation. The manual command
 is:
 
-```
+``` bash
 ln -s ../../vendor ./repos/drupal/vendor
 ```
 
@@ -296,7 +296,7 @@ can't find the settings.php file.
 This is done by a Composer script after initial installation. The manual
 commands are:
 
-```
+``` bash
 cd web && patch -p1 <../scaffold/scaffold-patch-index-php.patch
 cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 ```
@@ -329,7 +329,7 @@ root and symlink it into the Drupal core git clone.
 This is done by a Composer script after initial installation. The manual command
 is:
 
-```
+``` bash
 mkdir -p web/sites/simpletest
 ln -s ../../../web/sites/simpletest repos/drupal/sites
 ```
@@ -339,3 +339,45 @@ ln -s ../../../web/sites/simpletest repos/drupal/sites
 Drupal's /composer folder is not symlinked and therefore isn't visible to
 Composer. It's needed for some tests, and so is declared as an autoload
 location.
+
+## Core Development Using DDEV
+
+1. Clone this repository by using `git clone --branch=master https://github.com/bhanu951/drupal-core-development-project.git`
+2. cd repos
+3. git clone --branch=11.x https://git.drupalcode.org/project/drupal.git drupal
+4. ddev get drud/ddev-selenium-standalone-chrome (downloads latest chrome driver)
+5. ddev composer install (from project root)
+6. ddev composer require drupal/admin_toolbar drupal/devel
+7. cd repos/drupal ; `git status` to track core changes
+
+### DDEV Commands Usage
+
+1. ddev phpcs core/modules/user/src/RegisterForm.php (from repos/drupal directory)
+2. ddev phpcbf core/modules/user/src/RegisterForm.php (from repos/drupal directory)
+3. ddev phpunit core/modules/user/tests/src/Functional/UserAdminTest.php (from repos/drupal directory)
+4. ddev code-check (ddev equivalent of running `sh core/scripts/dev/commit-code-check.sh`)
+5. ddev cspell-check (Checks for forbidden and new words which are not present in dictonary)
+6. ddev install (Installs new site)
+7. ddev drush [arguments] (from project root)
+
+### TODO
+
+1. Add DDEV Rector Commands
+2. Find workaround for ddev phpstan command failures
+
+### Tips
+
+1. ddev drush si --site-name=drupal-145353
+
+### Known Issues
+
+There is a known issue where PHPSTAN doesnt work when the
+`ComponentTestDoesNotExtendCoreTest` is enabled in `core/phpstan.neon.dist`
+hence it advised to comment the rule for local analysis.
+
+```yaml
+rules:
+# - Drupal\PHPStan\Rules\ComponentTestDoesNotExtendCoreTest
+- PHPStan\Rules\Functions\MissingFunctionReturnTypehintRule
+- PHPStan\Rules\Methods\MissingMethodReturnTypehintRule
+```

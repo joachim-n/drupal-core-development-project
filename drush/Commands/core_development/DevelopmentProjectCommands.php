@@ -30,7 +30,7 @@ class DevelopmentProjectCommands extends DrushCommands {
 
   public static function createEarly(DrushContainer $drush_container): self {
     $commandHandler = new static(
-        $drush_container->get('loader')
+      $drush_container->get('loader')
     );
 
     return $commandHandler;

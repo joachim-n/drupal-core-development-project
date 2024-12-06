@@ -1,0 +1,10 @@
+#!/bin/bash
+
+## Description: Run PHPUnit
+## Usage: phpunit [flags] [args]
+## Example: "ddev phpunit --group big_pipe" or "ddev phpunit web/core/modules/action"
+
+TOP_LEVEL="/var/www/html/repos/drupal"
+cd $TOP_LEVEL
+
+/var/www/html/vendor/bin/phpunit -c /var/www/html/web/core/phpunit.xml.dist $@
