@@ -1,0 +1,69 @@
+name: drupal-core-development-project
+recipe: drupal11
+config:
+  composer_version: 2
+  webroot: web
+  # To use XDebug, set the following to `true`, then run `lando rebuild`
+  # In VS Code, install the extension https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug
+  # A .vscode/launch.json file needs to be present, along with a php.ini file.
+  # See https://docs.lando.dev/guides/lando-with-vscode.html
+  # and https://gist.github.com/MatthieuScarset/0c3860def9ff1f0b84e32f618c740655
+  xdebug: false
+services:
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+  chrome:
+    type: compose
+    services:
+      image: drupalci/webdriver-chromedriver:production
+      command: chromedriver --log-path=/tmp/chromedriver.log --no-sandbox --headless --verbose --whitelisted-ips= --allowed-origins=*
+  appserver:
+    build:
+      - mkdir -p $LANDO_WEBROOT/sites/simpletest/browser_output
+      - cp web/sites/default/default.settings.php web/sites/default/settings.php
+      - echo '\r\n$databases["default"]["default"] = [
+        \r\n  "database" => "drupal11",
+        \r\n  "username" => "drupal11",
+        \r\n  "password" => "drupal11",
+        \r\n  "prefix" => "",
+        \r\n  "host" => "database",
+        \r\n  "port" => "3306",
+        \r\n  "isolation_level" => "READ COMMITTED",
+        \r\n  "driver" => "mysql",
+        \r\n  "namespace" => "Drupal\\mysql\\Driver\\Database\\mysql",
+        \r\n  "autoload" => "core/modules/mysql/src/Driver/Database/mysql/",
+        \r\n];' >> web/sites/default/settings.php
+      - echo '\r\n$settings["hash_salt"] = "1234567890";' >> web/sites/default/settings.php
+    overrides:
+      # Changes only take effect after `lando rebuild`
+      environment:
+        # See https://agile.coop/blog/drupal-phpunit-tests-lando/
+        # Based on https://github.com/lando/lando/pull/1092/files
+        # See also https://github.com/lando/lando/issues/360
+        SYMFONY_DEPRECATIONS_HELPER: 'disabled'
+        SIMPLETEST_DB: 'mysql://drupal11:drupal11@database/drupal11'
+        BROWSERTEST_OUTPUT_BASE_URL: 'http://drupal-core-development-project.lndo.site'
+        # Note: SIMPLETEST_BASE_URL must currently be defined in the phpunit.xml file
+        # --disable-dev-shm-usage is needed to allow iframed content, such
+        # as Layout Builder iFrame Modals
+        # --no-sandbox is needed to run. If absent, the message will be
+        # 'The test wasn't able to connect to your webdriver instance.'
+        # goog:chromeOptions is new as of Drupal 10.3
+        # w3c:false is needed per #3240792
+        MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","goog:chromeOptions":{"w3c":false, "args":["--disable-gpu","--headless", "--no-sandbox", "--disable-dev-shm-usage"]}}, "http://chrome:9515"]'
+tooling:
+  composer:
+    service: appserver
+    description: Run composer commands
+    cmd:
+      - php -d memory_limit=-1 /usr/local/bin/composer
+  test:
+    service: appserver
+    description: Run all PHPUnit tests
+    cmd:
+      - sh .lando/test.sh
+  drush:
+    service: appserver
+    cmd: drush --root=/app --uri=https://drupal-core-development-project.lndo.site
