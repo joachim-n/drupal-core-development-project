@@ -3,7 +3,7 @@
 # every time we want to run tests.
 if ! grep -q "drupal/core-dev" composer.json; then
   echo "Adding core tooling. This may take a moment...";
-  composer require "drupal/core-dev-pinned"
+  composer require "drupal/core-dev"
 fi
 mkdir -p /app/web/sites/simpletest/browser_output
 chmod 777 /app/web/sites/simpletest/browser_output
