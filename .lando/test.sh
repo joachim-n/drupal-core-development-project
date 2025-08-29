@@ -8,4 +8,4 @@ fi
 mkdir -p /app/web/sites/simpletest/browser_output
 chmod 777 /app/web/sites/simpletest/browser_output
 # Now we actually run the command...
-/app/vendor/bin/phpunit -c /app/.lando/phpunit.xml --stop-on-failure --display-deprecations --testdox $1
+/app/vendor/bin/phpunit -c /app/.lando/phpunit.xml --stop-on-failure --stop-on-error --display-deprecations --testdox $1

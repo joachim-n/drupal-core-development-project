@@ -42,11 +42,11 @@
     ],
     "require": {
         "composer/installers": "^1.9 | ^2",
-        "drupal/core-composer-scaffold": "*",
-        "drupal/drupal": "*",
         "drupal/core": "*",
+        "drupal/core-composer-scaffold": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
+        "drupal/drupal": "*",
         "drush/drush": "^13",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "*"
@@ -57,12 +57,14 @@
         "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
-            "drupal/core-project-message": true,
-            "drupal/core-vendor-hardening": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/core-recipe-unpack": true,
+            "drupal/core-vendor-hardening": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "tbachert/spi": true
         }
     },
     "scripts": {

@@ -20,6 +20,7 @@ services:
       image: drupalci/webdriver-chromedriver:production
       command: chromedriver --log-path=/tmp/chromedriver.log --no-sandbox --headless --verbose --whitelisted-ips= --allowed-origins=*
   appserver:
+    scanner: false
     build:
       - mkdir -p $LANDO_WEBROOT/sites/simpletest/browser_output
       - cp web/sites/default/default.settings.php web/sites/default/settings.php
