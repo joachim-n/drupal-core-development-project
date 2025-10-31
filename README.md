@@ -73,6 +73,25 @@ following changes to the installation instructions for that addon:
 To run PHPUnit tests, you will need to tweak the DDEV phpunit command until
 https://github.com/justafish/ddev-drupal-core-dev/pull/37 is fixed.
 
+## Usage with Lando
+This repository includes tooling for use with [Lando](https://lando.dev/):
+
+```
+## Spin up the containers
+lando start
+
+## Use drush commands like site:install and user:login
+lando drush si -y
+lando drush uli
+
+## Add contrib modules
+lando composer require drupal/linkit
+
+## Run PHPUnit tests (including FunctionalJavascript!)
+## lando test <path/to/test>
+lando test web/core/modules/text/tests/src/FunctionalJavascript/TextareaWithSummaryTest.php
+```
+
 ## Installing other packages
 
 You can install any Composer package as you would with a normal project. This

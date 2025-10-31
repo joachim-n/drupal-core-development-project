@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  bootstrap="/app/web/core/tests/bootstrap.php"
+  colors="true"
+  beStrictAboutTestsThatDoNotTestAnything="true"
+  beStrictAboutOutputDuringTests="true"
+  beStrictAboutChangesToGlobalState="true"
+  cacheResult="false"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+  cacheDirectory=".phpunit.cache">
+  <php>
+    <ini name="error_reporting" value="32767" />
+    <ini name="memory_limit" value="-1" />
+    <env name="SIMPLETEST_BASE_URL" value="http://drupal-core-development-project.lndo.site"
+      force="true" />
+  </php>
+  <extensions>
+    <bootstrap class="Drupal\TestTools\Extension\HtmlLogging\HtmlOutputLogger">
+      <parameter name="outputDirectory" value="/app/web/sites/simpletest/browser_output" />
+      <parameter name="verbose" value="true" />
+    </bootstrap>
+  </extensions>
+  <testsuites>
+    <testsuite name="unit">
+      <file>./tests/TestSuites/UnitTestSuite.php</file>
+    </testsuite>
+    <testsuite name="kernel">
+      <file>./tests/TestSuites/KernelTestSuite.php</file>
+    </testsuite>
+    <testsuite name="functional">
+      <file>./tests/TestSuites/FunctionalTestSuite.php</file>
+    </testsuite>
+    <testsuite name="functional-javascript">
+      <file>./tests/TestSuites/FunctionalJavascriptTestSuite.php</file>
+    </testsuite>
+    <testsuite name="build">
+      <file>./tests/TestSuites/BuildTestSuite.php</file>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory>./includes</directory>
+      <directory>./lib</directory>
+      <directory>./modules</directory>
+      <directory>../modules</directory>
+      <directory>../sites</directory>
+    </include>
+    <exclude>
+      <directory>./modules/*/src/Tests</directory>
+      <directory>./modules/*/tests</directory>
+      <directory>../modules/*/src/Tests</directory>
+      <directory>../modules/*/tests</directory>
+      <directory>../modules/*/*/src/Tests</directory>
+      <directory>../modules/*/*/tests</directory>
+      <directory suffix=".api.php">./lib/**</directory>
+      <directory suffix=".api.php">./modules/**</directory>
+      <directory suffix=".api.php">../modules/**</directory>
+    </exclude>
+  </source>
+</phpunit>
