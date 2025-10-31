@@ -47,6 +47,7 @@
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
         "drupal/drupal": "*",
+        "drupal/module_builder": "^4.1",
         "drush/drush": "^13",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "*"
@@ -121,5 +122,8 @@
                 "type:drupal-custom-theme"
             ]
         }
+    },
+    "require-dev": {
+        "palantirnet/drupal-rector": "^0.21.0"
     }
 }
