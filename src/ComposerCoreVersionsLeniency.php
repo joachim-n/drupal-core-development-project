@@ -12,7 +12,7 @@ use Composer\Semver\VersionParser;
 // include_once './vendor/symfony/var-dumper/Resources/functions/dump.php';
 
 /**
- * Provides Composer scripts to allow installation on core 11.x.
+ * Provides Composer scripts to allow installation on core main branch.
  *
  * Inspired by mglaman/composer-drupal-lenient.
  */
