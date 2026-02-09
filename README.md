@@ -44,15 +44,18 @@ either with `drush si` or with the web UI.
 
 ### Installation on DDEV
 
-First, make sure your DDEV version is at least 1.23.0. Next, create a new folder
+First, make sure your DDEV version is at least 1.25.0. Next, create a new folder
 for your project and `cd` into it. Then:
 
 ```
-$ ddev config --project-type=drupal --php-version=8.3
+$ ddev config --project-type=drupal12 --docroot=web
 $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
-$ ddev config --update
-$ ddev restart
+```
+In case you are on a case-insensitive file system, like APFS on macOS, run: 
+
+```
+git -C ./repos/drupal config core.ignorecase true
 ```
 
 ### Installation on DDEV with the justafish/ddev-drupal-core-dev DDEV addon
