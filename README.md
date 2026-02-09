@@ -50,7 +50,7 @@ for your project and `cd` into it. Then:
 ```
 $ ddev config --project-type=drupal12 --docroot=web
 $ ddev start
-$ ddev composer create joachim-n/drupal-core-development-project
+$ ddev composer create-project joachim-n/drupal-core-development-project
 ```
 In case you are on a case-insensitive file system, like APFS on macOS, run: 
 
