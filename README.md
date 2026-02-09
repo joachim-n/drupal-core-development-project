@@ -48,11 +48,13 @@ First, make sure your DDEV version is at least 1.23.0. Next, create a new folder
 for your project and `cd` into it. Then:
 
 ```
-$ ddev config --project-type=drupal --php-version=8.3
-$ ddev start
+$ ddev config --project-type=drupal11 --php-version=8.3
 $ ddev composer create joachim-n/drupal-core-development-project
-$ ddev config --update
-$ ddev restart
+```
+
+If you have a case insensitive filesystem (for example for macOS) execute the following
+```
+$ cd repos/drupal && git config core.ignorecase true && cd ../../
 ```
 
 ### Installation on DDEV with the justafish/ddev-drupal-core-dev DDEV addon
