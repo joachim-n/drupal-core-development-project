@@ -12,7 +12,7 @@ It allows the following:
   the composer files that are part of Drupal core.
 - Contrib modules can be installed with Composer (normally Composer would refuse
   to install them because their info.yml file does not declare compatibility
-  with core 11.x).
+  with core `main` branch).
 - Other packages, including contrib modules, can be installed as git clones to
   develop them in tandem with Drupal core.
 
@@ -34,8 +34,8 @@ $ composer create-project joachim-n/drupal-core-development-project
 Composer will clone Drupal core into a 'repos/drupal' directory within the
 project, and then symlink that into the project when it installs Drupal core.
 
-Drupal core is checked out to its default branch, which is currently 11.x. To
-start on a different branch without first checking out 11.x, you can use the
+Drupal core is checked out to its default branch, which is currently main. To
+start on a different branch without first checking out main, you can use the
 `--no-install` option with the `composer create-project` command, then change
 the branch of the Drupal core clone, then do `composer install`.
 
