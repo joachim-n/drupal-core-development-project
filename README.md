@@ -100,7 +100,7 @@ tandem with core.
 1. Create a git clone of the module or package. The `repos/` folder can be used
    for this. It's simplest to start off from a main branch so that Composer sees
    this as the installed version, and dependencies work properly.
-2. Define a path respository for the package. See
+2. Define a path repository for the package. See
    https://getcomposer.org/doc/05-repositories.md#path for details.
 3. Do `composer require` for the package.
 
