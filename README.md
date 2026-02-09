@@ -52,7 +52,7 @@ $ ddev config --project-type=drupal12 --docroot=web
 $ ddev start
 $ ddev composer create joachim-n/drupal-core-development-project
 ```
-In case you are on a case-insensite file system, like APFS on macOS, run: 
+In case you are on a case-insensitive file system, like APFS on macOS, run: 
 
 ```
 git -C ./repos/drupal config core.ignorecase true
