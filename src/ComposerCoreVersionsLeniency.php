@@ -22,7 +22,7 @@ class ComposerCoreVersionsLeniency {
    * Act on pre-pool-create event.
    *
    * This tweaks the core requirement of contrib modules, so that Composer will
-   * install them when the Drupal core git clone is checked out to the 11.x
+   * install them when the Drupal core git clone is checked out to the 'main'
    * branch.
    *
    * @param \Composer\Plugin\PrePoolCreateEvent $event
@@ -31,11 +31,12 @@ class ComposerCoreVersionsLeniency {
   public static function prePoolCreate(PrePoolCreateEvent $event) {
     $packages = $event->getPackages();
 
-    // Only act if the current branch of drupal/core is 11.x
+    // Only act if the current branch of drupal/core is 'main'.
     /** @var \Composer\Package\BasePackage $package */
     foreach ($packages as $package) {
       if ($package->getName() == 'drupal/core') {
-        if ($package->getPrettyVersion() != '11.x-dev') {
+        // Apparently sometimes we get one version, sometimes the other. WTF?
+        if (!in_array($package->getPrettyVersion(), ['dev-main', '12.x-dev'])) {
           return;
         }
       }
@@ -63,21 +64,18 @@ class ComposerCoreVersionsLeniency {
       $drupal_core_require = $requires['drupal/core'];
 
       $pretty_constraint = $drupal_core_require->getPrettyConstraint();
-      if (str_contains($pretty_constraint, '^11')) {
-        continue;
-      }
 
-      // Make a new constraint with the 11 requirement appended.
-      $pretty_constraint_with_11 = $pretty_constraint . ' || ^11';
-      $constraint_with_11 = $version_parser->parseConstraints($pretty_constraint_with_11);
+      // Make a new constraint with the dev-main requirement appended.
+      $pretty_constraint_with_main = $pretty_constraint . ' || dev-main';
+      $constraint_with_main = $version_parser->parseConstraints($pretty_constraint_with_main);
 
       // Replace the existing core requirement with the new one.
       $requires['drupal/core'] = new Link(
         $drupal_core_require->getSource(),
         $drupal_core_require->getTarget(),
-        $constraint_with_11,
+        $constraint_with_main,
         $drupal_core_require->getDescription(),
-        $constraint_with_11->getPrettyString(),
+        $constraint_with_main->getPrettyString(),
       );
 
       // No idea why we need to check CompletePackage, just aping
