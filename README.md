@@ -52,7 +52,7 @@ $ ddev config --project-type=drupal12 --docroot=web
 $ ddev start
 $ ddev composer create-project joachim-n/drupal-core-development-project
 ```
-In case you are on a case-insensitive file system, like APFS on macOS, run: 
+In case you are on a case-insensitive file system, like APFS on macOS, run:
 
 ```
 git -C ./repos/drupal config core.ignorecase true
@@ -118,6 +118,17 @@ feature branch does not satisfy requirements. You can do one of:
 * Define the version that Composer sees for this package by specifying the
   "versions" option in the declaration of the path repository in
   `composer.json`.
+
+### Working with other versions of Drupal core
+
+You can change the git clone of Drupal core in `repos/drupal` to a different
+main branch. Prior to running `composer install` you may need to do some of the
+following:
+
+- You may need to delete `composer.lock`, particularly if your new version
+   doesn't have one of Drupal core's Composer plugins which existed in your
+   prior version.
+- If using DDEV, you may need to reconfigure which version of PHP it is using.
 
 ## Limitations
 
