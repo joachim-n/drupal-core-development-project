@@ -25,15 +25,7 @@
         },
         {
             "type": "path",
-            "url": "repos/drupal/composer/Plugin/ProjectMessage"
-        },
-        {
-            "type": "path",
-            "url": "repos/drupal/composer/Plugin/Scaffold"
-        },
-        {
-            "type": "path",
-            "url": "repos/drupal/composer/Plugin/VendorHardening"
+            "url": "repos/drupal/composer/Plugin/*"
         },
         {
             "type": "composer",
