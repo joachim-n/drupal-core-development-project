@@ -42,7 +42,7 @@
     ],
     "require": {
         "composer/installers": "^1.9 | ^2",
-        "drupal/core": "dev-main",
+        "drupal/core": "*",
         "drupal/core-composer-scaffold": "*",
         "drupal/drupal": "*",
         "drupal/core-dev": "*",
