@@ -57,9 +57,33 @@ class ComposerScripts {
     shell_exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch');
     shell_exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch');
 
-    // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
+    // Symlink the top-level vendor folder into the Drupal core git repo.
     static::makeSymlink('../../vendor', 'repos/drupal/vendor');
+
+    // Symlink the libraries folder into the Drupal core git repo.
+    static::makeSymlink('../../web/libraries', 'repos/drupal/libraries');
+
+    // Symlink external and custom folders into the Drupal core git repo.
+    foreach (['modules', 'profiles', 'sites', 'themes'] as $dir) {
+      foreach (scandir("web/$dir") as $sub) {
+        if (!file_exists("repos/drupal/$dir/$sub") && is_dir("web/$dir/$sub")) {
+          static::makeSymlink("../../../web/$dir/$sub", "repos/drupal/$dir/$sub");
+        }
+      }
+    }
+
+    // Symlink sites files and folders into the the Drupal core git repo.
+    foreach (scandir('web/sites') as $file) {
+      if (!file_exists("repos/drupal/sites/$file")) {
+        static::makeSymlink("../../../web/sites/$file", "repos/drupal/sites/$file");
+      }
+    }
+    foreach (scandir('web/sites/default') as $file) {
+      if (!file_exists("repos/drupal/sites/default/$file")) {
+        static::makeSymlink("../../../../web/sites/default/$file", "repos/drupal/sites/default/$file");
+      }
+    }
 
     // Create folders for running tests.
     if (!file_exists('web/sites/simpletest')) {
