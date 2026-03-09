@@ -186,7 +186,7 @@ $ cp phpunit-ddev.xml phpunit.xml
 
 ##### On other platforms
 
-1. Copy Drupal core's sample `phpunit.xml.dist`` file to the project root and
+1. Copy Drupal core's sample `phpunit.xml.dist` file to the project root and
 rename it to `phpunit.xml`:
 
 ```
