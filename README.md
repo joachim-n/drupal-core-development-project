@@ -19,6 +19,7 @@ It allows the following:
 ## Roadmap
 
 Get this into Drupal core! See
+https://www.drupal.org/project/drupal/issues/3188162 and
 https://www.drupal.org/project/drupal/issues/1792310.
 
 ## Installation
