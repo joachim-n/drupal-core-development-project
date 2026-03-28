@@ -1,0 +1,6 @@
+# Drupal
+web/
+vendor/
+composer.lock
+.editorconfig
+.gitattributes
