@@ -39,7 +39,6 @@
         "drupal/drupal": "*",
         "drupal/core-dev": "*",
         "drupal/core-recommended": "*",
-        "drush/drush": "^13",
         "phpspec/prophecy-phpunit": "*",
         "symfony/var-dumper": "*"
     },
