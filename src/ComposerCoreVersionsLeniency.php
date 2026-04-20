@@ -12,7 +12,15 @@ use Composer\Semver\VersionParser;
 // include_once './vendor/symfony/var-dumper/Resources/functions/dump.php';
 
 /**
- * Provides Composer scripts to allow installation on core main branch.
+ * Provides Composer scripts to allow installation of contrib modules.
+ *
+ * Because contrib modules will typically not yet declare they are compatible
+ * with the development version of Core, the Drupal packagist will generate a
+ * Composer dependency on drupal/core that will fail when Core is checked out to
+ * the `main` branch.
+ *
+ * This script acts on `pre-pool-create` to tweak dependencies of contrib
+ * projects.
  *
  * Inspired by mglaman/composer-drupal-lenient.
  */
