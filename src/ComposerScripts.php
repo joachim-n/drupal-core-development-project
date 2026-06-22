@@ -54,19 +54,8 @@ class ComposerScripts {
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
-    $output = NULL;
-    $result_code = NULL;
-    exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch', $output, $result_code);
-    if ($result_code == 1) {
-      throw new \LogicException("Patch 'scaffold-patch-index-php.patch' failed.");
-    }
-
-    $output = NULL;
-    $result_code = NULL;
-    exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch', $output, $result_code);
-    if ($result_code == 1) {
-      throw new \LogicException("Patch 'scaffold-patch-update-php.patch' failed.");
-    }
+    static::applyPatch('scaffold-patch-index-php.patch');
+    static::applyPatch('scaffold-patch-update-php.patch');
 
     // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
@@ -82,6 +71,26 @@ class ComposerScripts {
 
     // Symlink the simpletest folder into the Drupal core git repo.
     static::makeSymlink('../../../web/sites/simpletest', 'repos/drupal/sites/simpletest');
+  }
+
+  /**
+   * Applies a scaffold patch.
+   *
+   * The working directory is expected to be '/web'.
+   *
+   * @param string $patch_file
+   *   The name of a patch file in the '/scaffold' directory.
+   *
+   * @throws \LogicException
+   *   Throws an exception if the patch fails to apply.
+   */
+  protected static function applyPatch(string $patch_file): void {
+    $output = NULL;
+    $result_code = NULL;
+    exec('patch -p1 <../scaffold/' . $patch_file, $output, $result_code);
+    if ($result_code == 1) {
+      throw new \LogicException("Patch '{$patch_file}' failed.");
+    }
   }
 
   /**
