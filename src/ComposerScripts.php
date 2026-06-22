@@ -54,8 +54,16 @@ class ComposerScripts {
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
-    static::applyPatch('scaffold-patch-index-php.patch');
-    static::applyPatch('scaffold-patch-update-php.patch');
+    // Check the index.php file to see which patches to apply. On Drupal 12,
+    // the front controllers have changed to use Symfony runtime.
+    if (str_contains(file_get_contents('index.php'), 'autoload_runtime')) {
+      static::applyPatch('scaffold-patch-index-php-12.patch');
+      static::applyPatch('scaffold-patch-update-php-12.patch');
+    }
+    else {
+      static::applyPatch('scaffold-patch-index-php.patch');
+      static::applyPatch('scaffold-patch-update-php.patch');
+    }
 
     // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');

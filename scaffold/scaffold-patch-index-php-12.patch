@@ -1,0 +1,11 @@
+diff --git a/index.php b/index.php
+index a161ad175d9..fd019609fbc 100644
+--- a/index.php
++++ b/index.php
+@@ -13,5 +13,5 @@
+ require_once 'autoload_runtime.php';
+
+ return static function () {
+-  return new DrupalKernel('prod', require 'autoload.php');
++  return new DrupalKernel('prod', require 'autoload.php', TRUE, __DIR__);
+ };

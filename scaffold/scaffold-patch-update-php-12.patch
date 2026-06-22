@@ -1,0 +1,11 @@
+diff --git a/update.php b/update.php
+index b65649c..02ffa22 100644
+--- a/update.php
++++ b/update.php
+@@ -21,5 +21,5 @@
+ }
+
+ return static function () {
+-  return new UpdateKernel('prod', require 'autoload.php', FALSE);
++  return new UpdateKernel('prod', require 'autoload.php', FALSE, __DIR__);
+ };
