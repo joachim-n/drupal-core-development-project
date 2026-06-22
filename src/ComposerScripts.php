@@ -54,8 +54,19 @@ class ComposerScripts {
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
-    shell_exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch');
-    shell_exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch');
+    $output = NULL;
+    $result_code = NULL;
+    exec('patch -p1 <../scaffold/scaffold-patch-index-php.patch', $output, $result_code);
+    if ($result_code == 1) {
+      throw new \LogicException("Patch 'scaffold-patch-index-php.patch' failed.");
+    }
+
+    $output = NULL;
+    $result_code = NULL;
+    exec('patch -p1 <../scaffold/scaffold-patch-update-php.patch', $output, $result_code);
+    if ($result_code == 1) {
+      throw new \LogicException("Patch 'scaffold-patch-update-php.patch' failed.");
+    }
 
     // Symlink the top-level vendor folder into the Drupal core git repo.
     chdir('..');
