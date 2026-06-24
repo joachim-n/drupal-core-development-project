@@ -1,0 +1,45 @@
+diff --git a/core/includes/install.core.inc b/core/includes/install.core.inc
+--- a/core/includes/install.core.inc
++++ b/core/includes/install.core.inc
+@@ -341,7 +341,32 @@ function install_begin_request($class_loader, &$install_state): void {
+   }
+ 
+   $site_path = empty($install_state['site_path']) ? DrupalKernel::findSitePath($request, FALSE) : $install_state['site_path'];
+-  Settings::initialize(dirname(__DIR__, 2), $site_path, $class_loader);
++  // Use DOCUMENT_ROOT to avoid resolving symlinks when core/ is a symlinked
++  // directory. dirname(__DIR__, 2) resolves via the real filesystem path.
++  if (!empty($_SERVER['DOCUMENT_ROOT'])) {
++    $app_root = rtrim($_SERVER['DOCUMENT_ROOT'], '/\\');
++  }
++  else {
++    $app_root = dirname(__DIR__, 2);
++    // If core/ is a real directory (not a symlink), this path is the git
++    // clone root, not the web root. Search ancestor directories for a
++    // web root whose core/ symlink resolves to the same real path.
++    if (!is_link($app_root . '/core') && is_dir($app_root . '/core')) {
++      $core_real_path = realpath($app_root . '/core');
++      $search = dirname($app_root);
++      while ($search !== dirname($search)) {
++        foreach (glob($search . '/*/autoload.php') ?: [] as $candidate) {
++          $candidate_root = dirname($candidate);
++          if (is_link($candidate_root . '/core') && realpath($candidate_root . '/core') === $core_real_path) {
++            $app_root = $candidate_root;
++            break 2;
++          }
++        }
++        $search = dirname($search);
++      }
++    }
++  }
++  Settings::initialize($app_root, $site_path, $class_loader);
+ 
+   // Ensure that procedural dependencies are loaded as early as possible,
+   // since the error/exception handlers depend on them.
+@@ -370,7 +395,7 @@ function install_begin_request($class_loader, &$install_state): void {
+   // Register the database driver extension list provider.
+   $container
+     ->register('extension.list.database_driver', 'Drupal\Core\Extension\DatabaseDriverList')
+-    ->addArgument(dirname(__DIR__, 2))
++    ->addArgument($app_root)
+     ->addArgument('database_driver')
+     ->addArgument(new NullBackend('database_driver'));
