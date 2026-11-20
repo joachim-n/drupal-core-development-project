@@ -43,8 +43,24 @@ class ComposerCoreVersionsLeniency {
     /** @var \Composer\Package\BasePackage $package */
     foreach ($packages as $package) {
       if ($package->getName() == 'drupal/core') {
+        $drupal_core_version = $package->getPrettyVersion();
+
+        $act = FALSE;
+
         // Apparently sometimes we get one version, sometimes the other. WTF?
-        if (!in_array($package->getPrettyVersion(), ['dev-main', '12.x-dev'])) {
+        if ($drupal_core_version == 'dev-main') {
+          $act = TRUE;
+        }
+        if ($drupal_core_version == '12.x-dev') {
+          $act = TRUE;
+        }
+
+        // Allow feature branches with an issue number in the name.
+        if (preg_match('/\d{5,}/', $drupal_core_version)) {
+          $act = TRUE;
+        }
+
+        if (!$act) {
           return;
         }
       }
