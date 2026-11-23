@@ -1,0 +1,25 @@
+diff --git a/core/install.php b/core/install.php
+--- a/core/install.php
++++ b/core/install.php
+@@ -7,8 +7,17 @@
+
+ use Drupal\Component\Utility\OpCodeCache;
+
+-// Change the directory to the Drupal root.
+-chdir('..');
+-// Store the Drupal root path.
+-$root_path = realpath('');
++// Change the directory to the Drupal root.
++chdir('..');
++// Store the Drupal root path. Use SCRIPT_FILENAME when available to avoid
++// resolving symlinks incorrectly when core/ is a symlinked directory.
++if (PHP_SAPI !== 'cli' && isset($_SERVER['SCRIPT_FILENAME'])) {
++  $root_path = dirname($_SERVER['SCRIPT_FILENAME'], 2);
++  // Correct CWD so that relative paths in the install process (e.g.
++  // './' . $site_path in install.core.inc) resolve to the web root.
++  chdir($root_path);
++}
++else {
++  $root_path = realpath('');
++}
+

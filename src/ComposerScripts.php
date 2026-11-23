@@ -50,7 +50,7 @@ class ComposerScripts {
     // See https://github.com/composer/composer/issues/7911
     include './vendor/symfony/var-dumper/Resources/functions/dump.php';
 
-    // Apply a patch to the scaffold index.php file.
+    // Apply patches to scaffold files and the Drupal core git clone.
     // See https://www.drupal.org/project/drupal/issues/3188703
     // See https://www.drupal.org/project/drupal/issues/1792310
     chdir('web');
@@ -65,8 +65,16 @@ class ComposerScripts {
       static::applyPatch('scaffold-patch-update-php.patch');
     }
 
+    // Patch core/install.php and DrupalKernel to fix symlinked core/ root path
+    // detection. These patches must be applied from repos/drupal/ rather than
+    // through web/core because GNU patch 2.7+ refuses to traverse symlinks.
+    chdir('../repos/drupal');
+    shell_exec('patch --follow-symlinks -p1 <../../scaffold/scaffold-patch-install-php.patch');
+    shell_exec('patch --follow-symlinks -p1 <../../scaffold/scaffold-patch-install-core-inc.patch');
+    shell_exec('patch --follow-symlinks -p1 <../../scaffold/scaffold-patch-drupal-kernel-php.patch');
+
     // Symlink the top-level vendor folder into the Drupal core git repo.
-    chdir('..');
+    chdir('../..');
     static::makeSymlink('../../vendor', 'repos/drupal/vendor');
 
     // Create folders for running tests.

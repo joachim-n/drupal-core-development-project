@@ -1,0 +1,39 @@
+diff --git a/core/lib/Drupal/Core/DrupalKernel.php b/core/lib/Drupal/Core/DrupalKernel.php
+--- a/core/lib/Drupal/Core/DrupalKernel.php
++++ b/core/lib/Drupal/Core/DrupalKernel.php
+@@ -345,7 +345,29 @@
+   protected static function guessApplicationRoot() {
+-    // Determine the application root by:
+-    // - Removing the namespace directories from the path.
+-    // - Getting the path to the directory two levels up from the path
+-    //   determined in the previous step.
+-    return dirname(substr(__DIR__, 0, -strlen(__NAMESPACE__)), 2);
++    // Use DOCUMENT_ROOT when available (set by the web server to the configured
++    // docroot, without resolving symlinks when core/ is a symlinked directory).
++    if (!empty($_SERVER['DOCUMENT_ROOT'])) {
++      return rtrim($_SERVER['DOCUMENT_ROOT'], '/\\');
++    }
++    // Determine the application root by:
++    // - Removing the namespace directories from the path.
++    // - Getting the path to the directory two levels up from the path
++    //   determined in the previous step.
++    $guessed = dirname(substr(__DIR__, 0, -strlen(__NAMESPACE__)), 2);
++    // If core/ is a real directory (not a symlink), this path is the git
++    // clone root, not the web root. Search ancestor directories for a
++    // web root whose core/ symlink resolves to the same real path.
++    if (!is_link($guessed . '/core') && is_dir($guessed . '/core')) {
++      $core_real_path = realpath($guessed . '/core');
++      $search = dirname($guessed);
++      while ($search !== dirname($search)) {
++        foreach (glob($search . '/*/autoload.php') ?: [] as $candidate) {
++          $candidate_root = dirname($candidate);
++          if (is_link($candidate_root . '/core') && realpath($candidate_root . '/core') === $core_real_path) {
++            return $candidate_root;
++          }
++        }
++        $search = dirname($search);
++      }
++    }
++    return $guessed;
+   }
+
