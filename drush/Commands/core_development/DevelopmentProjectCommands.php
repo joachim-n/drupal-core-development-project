@@ -3,8 +3,10 @@
 namespace Drush\Commands\core_development;
 
 use Composer\Autoload\ClassLoader;
+use Consolidation\AnnotatedCommand\Hooks\HookManager;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
+use Drush\Attributes\Hook;
 use Drush\Commands\DrushCommands;
 use Drush\Drush;
 use Psr\Container\ContainerInterface as DrushContainer;
@@ -39,6 +41,7 @@ class DevelopmentProjectCommands extends DrushCommands {
   /**
    * @hook replace-command cache:rebuild
    */
+  #[Hook(type: HookManager::REPLACE_COMMAND_HOOK, target: 'cache:rebuild')]
   public function rebuild($options = ['cache-clear' => true]) {
     if (!$options['cache-clear']) {
       $this->logger()->info(dt("Skipping cache-clear operation due to --no-cache-clear option."));
