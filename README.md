@@ -337,11 +337,18 @@ cd web && patch -p1 <../scaffold/scaffold-patch-update-php.patch
 
 See https://www.drupal.org/project/drupal/issues/3188703 for more detail.
 
-#### Drush rebuild command
+#### Dr rebuild command
 
-The Drush cache:rebuild command does not work correctly if contrib modules are
-present, because it calls drupal_rebuild() which lets DrupalKernel guess the
+The Dr cache:rebuild command does not find the correct settings.php file and so
+fails to connect to the database. This is because it lets DrupalKernel guess the
 app root incorrectly.
+
+This project template replaces the command class for the cache:rebuild command
+so that it works correctly. This works by having an autoloaded file replace the
+runtime class on the CLI, and this custom runtime class then adds the
+replacement command.
+
+#### Drush rebuild command
 
 This project template contains a /drush folder which has a command class which
 replaces that command with custom code to correctly handle the app root.

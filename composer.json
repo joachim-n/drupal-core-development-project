@@ -72,6 +72,9 @@
         ]
     },
     "autoload": {
+        "files": [
+            "src/autoload.php"
+        ],
         "psr-4": {
             "DrupalGitCloneProject\\": "src/"
         }
